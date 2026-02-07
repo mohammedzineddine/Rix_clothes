@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#1a1a1a" />
     <title>Product Details — RIX CLOTHES</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&display=swap"
         rel="stylesheet">
@@ -108,6 +109,19 @@
         .qty-btn:hover {
             background: #f3f4f6;
         }
+
+        .cart-icon {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            transform: translateY(-2px);
+        }
+
+        .cart-icon:hover i {
+            color: #d4af37;
+        }
     </style>
 </head>
 
@@ -129,10 +143,11 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <button id="cartBtn"
-                    class="relative text-sm tracking-widest hover:rix-gold transition py-2 px-3 rounded-md">
-                    CART <span id="cartCount"
-                        class="absolute -top-3 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+                <button id="cartBtn" class="cart-icon text-xl hover:rix-gold transition p-2 rounded-md"
+                    aria-label="Shopping Cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cartCount"
+                        class="absolute -top-2 -right-1 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
                 </button>
                 <button id="mobileMenuBtn" class="md:hidden p-2 rounded-md rix-bg-gold text-gray-900"
                     aria-label="Toggle menu">☰</button>
