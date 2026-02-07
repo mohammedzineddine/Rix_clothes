@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1a1a1a" />
+    <title>Checkout — RIX CLOTHES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lora', serif;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-bg {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .rix-gold {
+            color: #d4af37;
+        }
+
+        .rix-bg-gold {
+            background-color: #d4af37;
+        }
+
+        .rix-border-gold {
+            border-color: #d4af37;
+        }
+
+        .rix-input {
+            border: 1px solid #d1d5db;
+            padding: 12px 16px;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-family: 'Lora', serif;
+        }
+
+        .rix-input:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .delivery-option {
+            border: 2px solid #e5e7eb;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 10px;
+        }
+
+        .delivery-option:hover {
+            border-color: #d4af37;
+            background-color: #fefce8;
+        }
+
+        .delivery-option.selected {
+            border-color: #d4af37;
+            background-color: #fefce8;
+        }
+
+        .checkout-success {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="nav-bg text-white sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-3xl font-bold tracking-wider rix-gold"
+                style="font-family: 'Playfair Display', serif;">RIX CLOTHES</a>
+
+            <div class="hidden md:flex items-center gap-4 text-sm tracking-widest uppercase text-gray-400">
+                <span>Classic</span>
+                <span class="opacity-50">•</span>
+                <span>Old Money</span>
+                <span class="opacity-50">•</span>
+                <span>Casual</span>
+                <span class="opacity-50">•</span>
+                <span>And more...</span>
+            </div>
+
+
+            <div class="flex items-center gap-4">
+                <button id="cartBtn"
+                    class="relative text-sm tracking-widest hover:rix-gold transition py-2 px-3 rounded-md">
+                    CART <span id="cartCount"
+                        class="absolute -top-3 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+                </button>
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-md rix-bg-gold text-gray-900"
+                    aria-label="Toggle menu">☰</button>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Header -->
+        <div class="mb-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">
+                Complete Your Order
+            </h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Premium fashion deserves premium service. Please provide your delivery details below.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            <!-- Left Column: Form -->
+            <section>
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold mb-2" style="font-family: 'Playfair Display', serif;">
+                            Delivery Information
+                        </h2>
+                        <p class="text-gray-600">Shipping via ZR Express - Rates calculated per wilaya</p>
+                    </div>
+
+                    <form id="checkoutForm" class="space-y-6">
+                        <!-- Customer Details -->
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm tracking-widest font-semibold mb-3 text-gray-700">
+                                    RECIPIENT NAME
+                                </label>
+                                <input id="custName" type="text" placeholder="Enter full name"
+                                    class="w-full rix-input rounded-lg" required />
+                            </div>
+
+                            <div>
+                                <label class="block text-sm tracking-widest font-semibold mb-3 text-gray-700">
+                                    PHONE NUMBER
+                                </label>
+                                <input id="custPhone" type="tel" placeholder="05 XX XX XX XX"
+                                    class="w-full rix-input rounded-lg" required />
+                            </div>
+
+                            <div>
+                                <label class="block text-sm tracking-widest font-semibold mb-3 text-gray-700">
+                                    DELIVERY ADDRESS
+                                </label>
+                                <input id="custAddress" type="text" placeholder="Street, Commune, Building"
+                                    class="w-full rix-input rounded-lg" required />
+                            </div>
+
+                            <div>
+                                <label class="block text-sm tracking-widest font-semibold mb-3 text-gray-700">
+                                    WILAYA
+                                </label>
+                                <select id="custWilaya" class="w-full rix-input rounded-lg" required>
+                                    <!-- options populated by JS -->
+                                </select>
+                                <p class="text-sm text-gray-500 mt-2">ZR Express shipping rates vary by wilaya</p>
+                            </div>
+                        </div>
+
+                        <!-- Delivery Type -->
+                        <div class="pt-6 border-t">
+                            <label class="block text-sm tracking-widest font-semibold mb-4 text-gray-700">
+                                DELIVERY TYPE
+                            </label>
+                            <div class="space-y-4">
+                                <div class="delivery-option rounded selected" data-delivery="home">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="w-6 h-6 border-2 rix-border-gold rounded-full flex items-center justify-center">
+                                                <div class="w-3 h-3 rix-bg-gold rounded-full"></div>
+                                            </div>
+                                            <div>
+                                                <div class="font-semibold text-lg">Home Delivery</div>
+                                                <div class="text-sm text-gray-600">Deliver to your home address -
+                                                    Convenient & secure</div>
+                                            </div>
+                                        </div>
+                                        <svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div class="delivery-option rounded" data-delivery="office">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="w-6 h-6 border-2 border-gray-300 rounded-full flex items-center justify-center">
+                                                <div class="w-3 h-3 bg-transparent rounded-full"></div>
+                                            </div>
+                                            <div>
+                                                <div class="font-semibold text-lg">Office Pickup</div>
+                                                <div class="text-sm text-gray-600">Pick up from ZR Express office -
+                                                    Lower cost option</div>
+                                            </div>
+                                        </div>
+                                        <svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-100">
+                                <div class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-amber-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <div>
+                                        <p class="text-sm font-medium text-amber-800">Cash on Delivery</p>
+                                        <p class="text-sm text-amber-700 mt-1">Pay securely when you receive your order.
+                                            ZR Express handles cash collection.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Message Area -->
+                        <div id="checkoutMsg" class="hidden p-4 rounded-lg text-sm checkout-success"></div>
+
+                        <!-- Submit Button -->
+                        <div class="pt-6">
+                            <button id="placeOrderBtn" type="submit"
+                                class="w-full px-8 py-4 rix-bg-gold text-gray-900 text-base tracking-widest font-semibold hover:bg-yellow-600 transition rounded-lg shadow-md hover:shadow-lg">
+                                COMPLETE ORDER
+                            </button>
+                            <p class="text-center text-sm text-gray-500 mt-3">
+                                By placing your order, you agree to our Terms of Service
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Right Column: Order Summary -->
+            <aside>
+                <div class="sticky top-24">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                        <h2 class="text-2xl font-bold mb-6" style="font-family: 'Playfair Display', serif;">
+                            Order Summary
+                        </h2>
+
+                        <!-- Cart Items -->
+                        <div class="mb-6">
+                            <h3 class="text-sm tracking-widest font-semibold mb-4 text-gray-700">ITEMS</h3>
+                            <div id="summaryItems" class="space-y-4">
+                                <!-- Items will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Order Totals -->
+                        <div class="space-y-3 pt-6 border-t">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Subtotal</span>
+                                <span id="summarySub" class="font-medium">0.00 DZ</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Shipping</span>
+                                <span id="summaryShipping" class="font-medium">—</span>
+                            </div>
+                            <div class="pt-4 border-t mt-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-semibold">Total</span>
+                                    <span id="summaryTotal" class="text-2xl font-bold rix-gold">0.00 DZ</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">All prices in Algerian Dinar (DZ)</p>
+                            </div>
+                        </div>
+
+                        <!-- Security Badge -->
+                        <div class="mt-8 pt-6 border-t">
+                            <div class="flex items-center justify-center gap-2 text-gray-600">
+                                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-sm">Secure checkout · Encrypted payment</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Need Help -->
+                    <div class="mt-6 bg-white rounded-2xl shadow-lg p-6">
+                        <h3 class="font-semibold mb-3">Need assistance?</h3>
+                        <p class="text-sm text-gray-600 mb-4">Our customer service team is here to help with your order.
+                        </p>
+                        <a href="contact.html"
+                            class="inline-flex items-center text-sm rix-gold font-medium hover:underline">
+                            Contact Support
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="nav-bg text-white mt-16">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 rix-gold" style="font-family: 'Playfair Display', serif;">RIX
+                        CLOTHES</h3>
+                    <p class="text-gray-300 mb-4">Premium fashion for the discerning individual.</p>
+                </div>
+                <div>
+                    <h3 class="text-sm tracking-widest font-semibold mb-4">QUICK LINKS</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="index.html" class="hover:rix-gold transition">Shop Collection</a></li>
+                        <li><a href="about.html" class="hover:rix-gold transition">Our Story</a></li>
+                        <li><a href="contact.html" class="hover:rix-gold transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm tracking-widest font-semibold mb-4">POLICIES</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="#" class="hover:rix-gold transition">Shipping Policy</a></li>
+                        <li><a href="#" class="hover:rix-gold transition">Returns & Exchanges</a></li>
+                        <li><a href="#" class="hover:rix-gold transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 RIX CLOTHES. All rights reserved.</p>
+                <p class="mt-2">Premium fashion redefined.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', () => {
+            if (!mobileMenu) return;
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+    <script src="supabase.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Update cart count on load
+        if (typeof updateCartCount === 'function') {
+            updateCartCount();
+        }
+
+        // Local copy of wilaya shipping rates (ZR Express prices in DZ)
+        // Replace the entire WILAYA_RATES array with this updated version
+        const WILAYA_RATES = [
+            { name: 'Adrar', home: 1350, office: 1100 },
+            { name: 'Chlef', home: 850, office: 600 },
+            { name: 'Laghouat', home: 950, office: 700 },
+            { name: 'Oum El Bouaghi', home: 800, office: 600 },
+            { name: 'Batna', home: 800, office: 600 },
+            { name: 'Béjaïa', home: 800, office: 600 },
+            { name: 'Biskra', home: 950, office: 700 },
+            { name: 'Béchar', home: 1300, office: 900 },
+            { name: 'Blida', home: 800, office: 600 },
+            { name: 'Bouira', home: 750, office: 600 },
+            { name: 'Tamanrasset', home: 1600, office: 1300 },
+            { name: 'Tébessa', home: 900, office: 600 },
+            { name: 'Tlemcen', home: 900, office: 600 },
+            { name: 'Tiaret', home: 850, office: 600 },
+            { name: 'Tizi Ouzou', home: 850, office: 600 },
+            { name: 'Algiers', home: 650, office: 500 },
+            { name: 'Djelfa', home: 950, office: 700 },
+            { name: 'Jijel', home: 800, office: 600 },
+            { name: 'Sétif', home: 750, office: 600 },
+            { name: 'Saïda', home: 850, office: 600 },
+            { name: 'Skikda', home: 850, office: 600 },
+            { name: 'Sidi Bel Abbès', home: 850, office: 600 },
+            { name: 'Annaba', home: 850, office: 600 },
+            { name: 'Guelma', home: 850, office: 600 },
+            { name: 'Constantine', home: 800, office: 600 },
+            { name: 'Médéa', home: 800, office: 600 },
+            { name: 'Mostaganem', home: 850, office: 600 },
+            { name: 'M\'Sila', home: 750, office: 600 },
+            { name: 'Mascara', home: 850, office: 600 },
+            { name: 'Ouargla', home: 1000, office: 700 },
+            { name: 'Oran', home: 800, office: 600 },
+            { name: 'El Bayadh', home: 1000, office: 700 },
+            { name: 'Illizi', home: 0, office: 0 }, // Service not available
+            { name: 'Bordj Bou Arreridj', home: 800, office: 600 }, // Assuming this is the local wilaya
+            { name: 'Boumerdes', home: 850, office: 600 },
+            { name: 'El Tarf', home: 850, office: 600 },
+            { name: 'Tindouf', home: 0, office: 0 }, // Service not available
+            { name: 'Tissemsilt', home: 800, office: 600 },
+            { name: 'El Oued', home: 1000, office: 700 },
+            { name: 'Khenchela', home: 800, office: 600 },
+            { name: 'Souk Ahras', home: 850, office: 600 },
+            { name: 'Tipaza', home: 850, office: 600 },
+            { name: 'Mila', home: 800, office: 600 },
+            { name: 'Aïn Defla', home: 850, office: 600 },
+            { name: 'Naâma', home: 1200, office: 700 },
+            { name: 'Aïn Témouchent', home: 850, office: 600 },
+            { name: 'Ghardaïa', home: 1000, office: 700 },
+            { name: 'Relizane', home: 850, office: 600 },
+            { name: 'Timimoun', home: 1400, office: 1100 },
+            { name: 'Bordj Badji Mokhtar', home: 0, office: 0 }, // Service not available
+            { name: 'Ouled Djellal', home: 950, office: 700 },
+            { name: 'Béni Abbès', home: 1400, office: 1100 },
+            { name: 'In Salah', home: 1600, office: 1300 },
+            { name: 'In Guezzam', home: 1600, office: 0 }, // Only home delivery
+            { name: 'Touggourt', home: 1000, office: 700 },
+            { name: 'Djanet', home: 0, office: 0 }, // Service not available
+            { name: 'El M\'Ghair', home: 1000, office: 0 }, // Only home delivery
+            { name: 'El Meniaa', home: 1000, office: 0 } // Only home delivery
+        ];
+        // Track selected delivery type
+        let selectedDeliveryType = 'home';
+
+        // Populate wilaya select
+        const wilayaSelect = document.getElementById('custWilaya');
+        WILAYA_RATES.forEach(w => {
+            const opt = document.createElement('option');
+            opt.value = w.name;
+            opt.dataset.home = w.home;
+            opt.dataset.office = w.office;
+            opt.textContent = `${w.name} `;
+            wilayaSelect.appendChild(opt);
+        });
+
+        // Handle delivery type selection
+        document.querySelectorAll('.delivery-option').forEach(option => {
+            option.addEventListener('click', function () {
+                document.querySelectorAll('.delivery-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                    const circle = opt.querySelector('.w-6 div');
+                    circle.classList.remove('rix-bg-gold');
+                    circle.classList.add('bg-transparent');
+                    const border = opt.querySelector('.w-6');
+                    border.classList.remove('rix-border-gold');
+                    border.classList.add('border-gray-300');
+                });
+
+                this.classList.add('selected');
+                const circle = this.querySelector('.w-6 div');
+                circle.classList.remove('bg-transparent');
+                circle.classList.add('rix-bg-gold');
+                const border = this.querySelector('.w-6');
+                border.classList.remove('border-gray-300');
+                border.classList.add('rix-border-gold');
+
+                selectedDeliveryType = this.dataset.delivery;
+                renderSummary();
+            });
+        });
+
+        function formatPrice(p) {
+            return Number(p).toFixed(2);
+        }
+
+        function renderSummary() {
+            const cart = getCart ? getCart() : [];
+            const summaryItems = document.getElementById('summaryItems');
+            if (!summaryItems) {
+                console.error('summaryItems element not found');
+                return;
+            }
+
+            summaryItems.innerHTML = '';
+
+            if (cart.length === 0) {
+                summaryItems.innerHTML = `
+                    <div class="text-center py-8">
+                        <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                        <p class="text-gray-500 mb-4">Your cart is empty</p>
+                        <a href="index.html" class="text-sm rix-gold font-medium hover:underline">
+                            Continue shopping
+                        </a>
+                    </div>
+                `;
+            } else {
+                cart.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'flex items-start gap-4';
+
+                    // Add size and color info if they exist
+                    const optionsText = [];
+                    if (item.size) optionsText.push(item.size);
+                    if (item.color) optionsText.push(item.color);
+                    const optionsHTML = optionsText.length > 0 ?
+                        `<div class="text-xs text-gray-500 mt-1">${optionsText.join(', ')}</div>` : '';
+
+                    div.innerHTML = `
+                        <div class="flex-shrink-0 w-16 h-16 bg-gray-100 rounded-lg overflow-hidden">
+                            <img src="${item.image_url || 'https://via.placeholder.com/80'}" 
+                                 alt="${item.name}" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-medium">${item.name}</div>
+                            ${optionsHTML}
+                            <div class="flex justify-between items-center mt-2">
+                                <div class="text-sm text-gray-600">${item.qty || 1} × ${formatPrice(item.price)} DZ</div>
+                                <div class="font-semibold">${formatPrice(item.price * (item.qty || 1))} DZ</div>
+                            </div>
+                        </div>
+                    `;
+                    summaryItems.appendChild(div);
+                });
+            }
+
+            const subtotal = cart.reduce((s, i) => s + (i.price * (i.qty || 1)), 0);
+            document.getElementById('summarySub').textContent = `${formatPrice(subtotal)} DZ`;
+
+            // Set shipping from selected option and delivery type
+            const selected = wilayaSelect.selectedOptions[0];
+            const priceKey = selectedDeliveryType === 'home' ? 'home' : 'office';
+            const ship = selected ? Number(selected.dataset[priceKey]) : 0;
+
+            if (ship === 0 && selectedDeliveryType === 'office' && selected) {
+                document.getElementById('summaryShipping').innerHTML = '<span class="text-red-600 text-xs">Not available</span>';
+            } else {
+                document.getElementById('summaryShipping').textContent = ship ? `${formatPrice(ship)} DZ` : '—';
+            }
+
+            document.getElementById('summaryTotal').textContent = `${formatPrice(subtotal + ship)} DZ`;
+        }
+
+        // Update summary when wilaya changes
+        wilayaSelect.addEventListener('change', renderSummary);
+
+        // Initial render
+        renderSummary();
+
+        // Wire form submit to app.js function submitCheckout
+        document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const placeBtn = document.getElementById('placeOrderBtn');
+            const msgEl = document.getElementById('checkoutMsg');
+            msgEl.className = 'hidden p-4 rounded-lg text-sm';
+
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+            const wilaya = document.getElementById('custWilaya').value;
+            const priceKey = selectedDeliveryType === 'home' ? 'home' : 'office';
+            const ship = Number(document.getElementById('custWilaya').selectedOptions[0].dataset[priceKey] || 0);
+
+            // Validation
+            if (!name || !phone || !address) {
+                msgEl.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-red-800">Please complete all required fields</p>
+                            <p class="text-red-700 mt-1">All fields are required to process your order.</p>
+                        </div>
+                    </div>
+                `;
+                msgEl.className = 'p-4 rounded-lg bg-red-50 border border-red-200 checkout-success';
+                msgEl.classList.remove('hidden');
+                msgEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            if (ship === 0 && selectedDeliveryType === 'office') {
+                msgEl.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-amber-800">Office pickup not available</p>
+                            <p class="text-amber-700 mt-1">Please select home delivery for ${wilaya}.</p>
+                        </div>
+                    </div>
+                `;
+                msgEl.className = 'p-4 rounded-lg bg-amber-50 border border-amber-200 checkout-success';
+                msgEl.classList.remove('hidden');
+                msgEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            // Check if submitCheckout is available
+            if (typeof submitCheckout === 'undefined') {
+                msgEl.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-red-800">System error</p>
+                            <p class="text-red-700 mt-1">Please refresh the page and try again.</p>
+                        </div>
+                    </div>
+                `;
+                msgEl.className = 'p-4 rounded-lg bg-red-50 border border-red-200 checkout-success';
+                msgEl.classList.remove('hidden');
+                return;
+            }
+
+            placeBtn.disabled = true;
+            placeBtn.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-900 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Processing Order...
+            `;
+
+            try {
+                const result = await submitCheckout({
+                    name,
+                    phone,
+                    address,
+                    wilaya,
+                    shipping: ship,
+                    deliveryType: selectedDeliveryType
+                });
+
+                if (result && result.success) {
+                    msgEl.innerHTML = `
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <div>
+                                <p class="font-medium text-green-800">Order Confirmed!</p>
+                                <p class="text-green-700 mt-1">
+                                    Thank you for your order <strong>#${result.orderId}</strong>. 
+                                    Shipping: ${result.shippingCost} DZ.
+                                </p>
+                                <div class="mt-4">
+                                    <a href="index.html" class="inline-flex items-center px-4 py-2 rix-bg-gold text-gray-900 text-sm font-medium rounded-lg hover:bg-yellow-600 transition">
+                                        Continue Shopping
+                                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    msgEl.className = 'p-4 rounded-lg bg-green-50 border border-green-200 checkout-success';
+                    msgEl.classList.remove('hidden');
+
+                    // Reset form
+                    document.getElementById('checkoutForm').reset();
+                    selectedDeliveryType = 'home';
+                    renderSummary();
+
+                } else {
+                    const errorMsg = result && result.message ? result.message : 'Checkout failed. Please try again.';
+                    msgEl.innerHTML = `
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            <div>
+                                <p class="font-medium text-red-800">Order Failed</p>
+                                <p class="text-red-700 mt-1">${errorMsg}</p>
+                            </div>
+                        </div>
+                    `;
+                    msgEl.className = 'p-4 rounded-lg bg-red-50 border border-red-200 checkout-success';
+                    msgEl.classList.remove('hidden');
+                }
+            } finally {
+                placeBtn.disabled = false;
+                placeBtn.textContent = 'COMPLETE ORDER';
+                msgEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    </script>
+</body>
+
+</html>
