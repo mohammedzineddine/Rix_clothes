@@ -911,5 +911,186 @@ async function initProductDetail() {
     }
 }
 
+//---new
+
+// Add these functions to app.js
+
+// Fetch all categories
+async function fetchCategories() {
+    const { data, error } = await supabase.from('categories').select('*').order('display_order', { ascending: true });
+    if (error) {
+        console.error('Error fetching categories', error);
+        return [];
+    }
+    return data || [];
+}
+
+// Render products with category filtering
+async function renderProductsWithFilter(products) {
+    const container = document.getElementById('products');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    products.forEach(p => {
+        // Process available options
+        const availableSizes = processOptions(p.available_sizes);
+        const availableColors = processOptions(p.available_colors);
+
+        // Create options badge if available
+        let optionsBadge = '';
+        if (availableSizes.length > 0) {
+            const sizes = availableSizes.slice(0, 3).join(', ');
+            const more = availableSizes.length > 3 ? ` +${availableSizes.length - 3}` : '';
+            optionsBadge = `
+                <div class="mt-2 text-xs text-gray-500">
+                    <span class="font-medium">Sizes:</span> ${sizes}${more}
+                </div>
+            `;
+        }
+
+        const card = document.createElement('article');
+        card.className = 'product-card bg-white overflow-hidden flex flex-col cursor-pointer';
+        card.onclick = () => window.location.href = `product-detail.html?id=${p.id}`;
+
+        card.innerHTML = `
+            <div class="block overflow-hidden bg-gray-100 h-80">
+                <img src="${p.image_url || 'https://via.placeholder.com/400x300'}" 
+                     alt="${p.name}" 
+                     class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+                <h3 class="text-lg tracking-wide mb-2" style="font-family: 'Playfair Display', serif;">
+                    ${p.name}
+                </h3>
+                <p class="text-sm text-gray-600 flex-1 leading-relaxed">${p.description || ''}</p>
+                ${optionsBadge}
+                <div class="mt-6 flex items-center justify-between">
+                    <div class="text-lg font-semibold">${formatPrice(p.price)} DZ</div>
+                    <button class="px-4 py-2 bg-gray-900 text-white text-sm tracking-wider hover:bg-black transition" 
+                            data-id="${p.id}">
+                        VIEW DETAILS
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // Update button text and functionality
+        const btn = card.querySelector('button');
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            window.location.href = `product-detail.html?id=${p.id}`;
+        });
+
+        container.appendChild(card);
+    });
+}
+
+// Update the DOMContentLoaded event listener in app.js
+// Replace the existing one with this:
+window.addEventListener('DOMContentLoaded', async () => {
+    updateCartCount();
+
+    // Only fetch products if on index page
+    if (document.getElementById('products')) {
+        const products = await fetchProducts();
+        renderProductsWithFilter(products);
+        
+        // Create category filter buttons
+        const categories = await fetchCategories();
+        if (categories.length > 0 && document.getElementById('categoryFilters')) {
+            renderCategoryFilters(categories);
+        }
+    }
+
+    const cartBtn = document.getElementById('cartBtn');
+    const closeCartBtn = document.getElementById('closeCart');
+    const clearCartBtn = document.getElementById('clearCart');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    // Only add event listeners if elements exist
+    if (cartBtn) cartBtn.addEventListener('click', openCart);
+    if (closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
+    if (clearCartBtn) clearCartBtn.addEventListener('click', () => {
+        if (confirm('Are you sure you want to clear your cart?')) {
+            clearCart();
+        }
+    });
+    if (checkoutBtn) checkoutBtn.addEventListener('click', () => {
+        window.location.href = 'checkout.html';
+    });
+
+    const cartItems = document.getElementById('cartItems');
+    if (cartItems) {
+        cartItems.addEventListener('click', (e) => {
+            const action = e.target.getAttribute('data-action');
+            const id = e.target.getAttribute('data-id');
+            const size = e.target.getAttribute('data-size') || '';
+            const color = e.target.getAttribute('data-color') || '';
+            if (!action || !id) return;
+            if (action === 'inc') changeQty(id, 1, size, color);
+            if (action === 'dec') changeQty(id, -1, size, color);
+        });
+    }
+
+    window.saveCart = saveCart;
+});
+
+// Function to render category filter buttons
+function renderCategoryFilters(categories) {
+    const filterContainer = document.getElementById('categoryFilters');
+    if (!filterContainer) return;
+    
+    filterContainer.innerHTML = `
+        <button class="category-filter active px-4 py-2 bg-gray-900 text-white text-sm tracking-widest hover:bg-black transition" data-category="all">
+            ALL
+        </button>
+        ${categories.map(cat => `
+            <button class="category-filter px-4 py-2 border border-gray-300 text-gray-700 text-sm tracking-widest hover:bg-gray-100 transition" data-category="${cat.id}">
+                ${cat.name}
+            </button>
+        `).join('')}
+    `;
+    
+    // Add click handlers
+    document.querySelectorAll('.category-filter').forEach(btn => {
+        btn.addEventListener('click', async function() {
+            // Update active state
+            document.querySelectorAll('.category-filter').forEach(b => {
+                b.classList.remove('active', 'bg-gray-900', 'text-white');
+                b.classList.add('border', 'border-gray-300', 'text-gray-700', 'hover:bg-gray-100');
+            });
+            this.classList.add('active', 'bg-gray-900', 'text-white');
+            this.classList.remove('border', 'border-gray-300', 'text-gray-700', 'hover:bg-gray-100');
+            
+            // Filter products
+            const categoryId = this.dataset.category;
+            let products;
+            if (categoryId === 'all') {
+                products = await fetchProducts();
+            } else {
+                products = await fetchProductsByCategory(categoryId);
+            }
+            renderProductsWithFilter(products);
+        });
+    });
+}
+
+// Fetch products by category
+async function fetchProductsByCategory(categoryId) {
+    const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('category_id', categoryId)
+        .order('id', { ascending: true });
+    if (error) {
+        console.error('Error fetching products by category', error);
+        return [];
+    }
+    return data || [];
+}
+
+
 console.log('✅ app.js loaded with Telegram integration');
+
 console.log('📱 Test Telegram: run testTelegramBot() in console');
