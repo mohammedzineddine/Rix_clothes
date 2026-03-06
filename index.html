@@ -81,6 +81,19 @@
         }
     </style>
 </head>
+<!-- Announcement Bar - Free Shipping Over 25000 DZD (Gold Version) -->
+<div class="bg-black text-white py-2.5 text-center text-sm font-medium tracking-wide border-b border-rix-gold/20">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3">
+        <svg class="w-5 h-5 rix-gold" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+            <path d="M3 4h14l-1 7H4L3 4z" />
+        </svg>
+        <span>🚚<span class="font-semibold">التوصيل مجاني</span> للطلبات التي تتجاوز <span
+                class="font-bold rix-gold text-base mx-1">25000 دج</span></span>
+
+
+    </div>
+</div>
 
 <body class="bg-white text-gray-900">
     <!-- Hero Section with RIX Background -->
@@ -144,6 +157,13 @@
                     sophistication.</p>
             </div>
 
+            <!-- Category Filters - Add after the "Featured Collection" heading -->
+            <div class="flex flex-wrap justify-center gap-3 mb-8" id="categoryFilters">
+                <!-- Categories will be loaded by JavaScript -->
+                <button class="px-4 py-2 bg-gray-200 text-gray-600">Loading categories...</button>
+            </div>
+
+            <!-- Products Grid (existing) -->
             <div id="products" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Products will be loaded by JavaScript -->
                 <div class="text-center py-12 text-gray-500">Loading products...</div>
