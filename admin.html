@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-    <title>Admin — Vintage & Glory</title>
+    <title>Admin — RIX CLOTHES</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&display=swap"
@@ -42,8 +42,8 @@
 
         .luxury-input:focus {
             outline: none;
-            border-color: #1a1a1a;
-            box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.1);
+            border-color: #d4af37;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
         }
 
         .luxury-table {
@@ -54,7 +54,7 @@
 
         .luxury-table thead {
             background-color: #f9fafb;
-            border-bottom: 2px solid #1a1a1a;
+            border-bottom: 2px solid #d4af37;
         }
 
         .luxury-table th {
@@ -70,13 +70,35 @@
             padding: 12px;
             border-bottom: 1px solid #e5e7eb;
         }
+
+        .tab-btn {
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            border-bottom-color: #d4af37;
+            color: #d4af37;
+        }
+
+        .rix-gold {
+            color: #d4af37;
+        }
+
+        .rix-bg-gold {
+            background-color: #d4af37;
+        }
     </style>
 </head>
 
 <body class="bg-white text-gray-900">
     <nav class="luxury-bg text-white sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="index.html" class="text-3xl font-bold tracking-wider"
+            <a href="index.html" class="text-3xl font-bold tracking-wider rix-gold"
                 style="font-family: 'Playfair Display', serif;">ADMIN PANEL</a>
             <div class="hidden md:flex items-center gap-4">
                 <button id="logoutBtn"
@@ -112,80 +134,175 @@
         </form>
         <p id="adminAuthMsg" class="text-sm text-gray-600 mt-2 text-center"></p>
         <hr class="my-4">
-
     </div>
 
     <!-- Admin panel (hidden until auth) -->
     <div id="adminPanel" class="hidden max-w-7xl mx-auto px-6 py-12">
-        <div class="flex items-center justify-between mb-12">
-            <h1 class="text-4xl font-bold tracking-tight" style="font-family: 'Playfair Display', serif;">Product
-                Management</h1>
+        <div class="flex items-center justify-between mb-8">
+            <h1 class="text-4xl font-bold tracking-tight" style="font-family: 'Playfair Display', serif;">
+                Store Management
+            </h1>
             <button id="generateBtn"
-                class="px-6 py-3 bg-gray-900 text-white text-sm tracking-widest hover:bg-black transition">GENERATE
-                SAMPLES</button>
+                class="px-6 py-3 bg-gray-900 text-white text-sm tracking-widest hover:bg-black transition">
+                GENERATE SAMPLES
+            </button>
         </div>
 
-        <!-- Add/Edit product form -->
-        <div class="bg-white p-8 shadow-lg mb-8">
-            <h2 class="text-2xl font-semibold mb-6 tracking-tight" style="font-family: 'Playfair Display', serif;">
-                <span id="formTitle">Add Product</span>
-            </h2>
-            <form id="productForm" class="space-y-4">
-                <div id="productFormMsg" class="hidden p-3 rounded text-sm"></div>
-                <div class="text-right">
-                    <button type="button" id="checkBucketBtn" class="px-3 py-1 text-xs bg-gray-100 rounded">Check
-                        storage bucket</button>
-                </div>
-                <div>
-                    <label class="block text-sm tracking-widest font-semibold mb-3">PRODUCT NAME</label>
-                    <input id="productName" type="text" placeholder="e.g. Classic Denim Jacket"
-                        class="w-full luxury-input" required />
-                </div>
-                <div>
-                    <label class="block text-sm tracking-widest font-semibold mb-3">DESCRIPTION</label>
-                    <textarea id="productDesc" placeholder="Brief description" class="w-full luxury-input"
-                        rows="3"></textarea>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
+        <!-- Admin Tabs -->
+        <div class="border-b border-gray-200 mb-8">
+            <div class="flex gap-4">
+                <button id="tabProducts" class="tab-btn active">PRODUCTS</button>
+                <button id="tabCategories" class="tab-btn">CATEGORIES</button>
+            </div>
+        </div>
+
+        <!-- PRODUCTS SECTION -->
+        <div id="productsSection">
+            <!-- Add/Edit product form -->
+            <div class="bg-white p-8 shadow-lg mb-8">
+                <h2 class="text-2xl font-semibold mb-6 tracking-tight" style="font-family: 'Playfair Display', serif;">
+                    <span id="formTitle">Add Product</span>
+                </h2>
+                <form id="productForm" class="space-y-4">
+                    <div id="productFormMsg" class="hidden p-3 rounded text-sm"></div>
+                    <div class="text-right">
+                        <button type="button" id="checkBucketBtn" class="px-3 py-1 text-xs bg-gray-100 rounded">Check
+                            storage bucket</button>
+                    </div>
+
+                    <!-- Category Selection -->
                     <div>
-                        <label class="block text-sm tracking-widest font-semibold mb-3">PRICE (DZ)</label>
-                        <input id="productPrice" type="number" step="0.01" placeholder="49.99"
+                        <label class="block text-sm tracking-widest font-semibold mb-3">CATEGORY</label>
+                        <select id="productCategory" class="w-full luxury-input" required>
+                            <option value="">Select a category</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm tracking-widest font-semibold mb-3">PRODUCT NAME</label>
+                        <input id="productName" type="text" placeholder="e.g. Classic Denim Jacket"
                             class="w-full luxury-input" required />
                     </div>
                     <div>
-                        <label class="block text-sm tracking-widest font-semibold mb-3">IMAGE</label>
-                        <div class="space-y-2">
-                            <input id="productFile" type="file" accept="image/*" class="w-full" />
-                            <input id="productImage" type="url" placeholder="Or paste an image URL (https://...)"
-                                class="w-full luxury-input" />
-                            <div class="flex items-center gap-2">
-                                <input id="removeImage" type="checkbox" class="h-4 w-4" />
-                                <label for="removeImage" class="text-sm tracking-widest">Remove current image
-                                    URL</label>
-                            </div>
-                            <div id="productPreviewWrap" class="mt-2">
-                                <img id="productPreview" src="" alt="preview"
-                                    class="w-32 h-32 object-cover rounded hidden">
+                        <label class="block text-sm tracking-widest font-semibold mb-3">DESCRIPTION</label>
+                        <textarea id="productDesc" placeholder="Brief description" class="w-full luxury-input"
+                            rows="3"></textarea>
+                    </div>
+
+                    <!-- Available Sizes -->
+                    <div>
+                        <label class="block text-sm tracking-widest font-semibold mb-3">AVAILABLE SIZES</label>
+                        <input id="productSizes" type="text" placeholder="e.g. S, M, L, XL (comma separated)"
+                            class="w-full luxury-input" />
+                        <p class="text-xs text-gray-500 mt-1">Separate sizes with commas</p>
+                    </div>
+
+                    <!-- Available Colors -->
+                    <div>
+                        <label class="block text-sm tracking-widest font-semibold mb-3">AVAILABLE COLORS</label>
+                        <input id="productColors" type="text" placeholder="e.g. Black, Blue, Red (comma separated)"
+                            class="w-full luxury-input" />
+                        <p class="text-xs text-gray-500 mt-1">Separate colors with commas</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm tracking-widest font-semibold mb-3">PRICE (DZ)</label>
+                            <input id="productPrice" type="number" step="0.01" placeholder="49.99"
+                                class="w-full luxury-input" required />
+                        </div>
+                        <div>
+                            <label class="block text-sm tracking-widest font-semibold mb-3">IMAGE</label>
+                            <div class="space-y-2">
+                                <input id="productFile" type="file" accept="image/*" class="w-full" />
+                                <input id="productImage" type="url" placeholder="Or paste an image URL (https://...)"
+                                    class="w-full luxury-input" />
+                                <div class="flex items-center gap-2">
+                                    <input id="removeImage" type="checkbox" class="h-4 w-4" />
+                                    <label for="removeImage" class="text-sm tracking-widest">Remove current image
+                                        URL</label>
+                                </div>
+                                <div id="productPreviewWrap" class="mt-2">
+                                    <img id="productPreview" src="" alt="preview"
+                                        class="w-32 h-32 object-cover rounded hidden">
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="flex gap-2">
+                        <button type="submit" id="submitBtn"
+                            class="px-6 py-3 bg-gray-900 text-white text-sm tracking-widest hover:bg-black transition">ADD</button>
+                        <button type="button" id="resetBtn"
+                            class="px-6 py-3 bg-gray-300 text-gray-900 text-sm tracking-widest hover:bg-gray-400 transition"
+                            style="display:none;">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Products table -->
+            <div class="bg-white p-8 shadow-lg">
+                <h2 class="text-2xl font-semibold mb-6 tracking-tight" style="font-family: 'Playfair Display', serif;">
+                    Products</h2>
+                <div id="productsTable" class="overflow-x-auto">
+                    <!-- table rendered here -->
                 </div>
-                <div class="flex gap-2">
-                    <button type="submit" id="submitBtn"
-                        class="px-6 py-3 bg-gray-900 text-white text-sm tracking-widest hover:bg-black transition">ADD</button>
-                    <button type="button" id="resetBtn"
-                        class="px-6 py-3 bg-gray-300 text-gray-900 text-sm tracking-widest hover:bg-gray-400 transition"
-                        style="display:none;">Cancel</button>
-                </div>
-            </form>
+            </div>
         </div>
 
-        <!-- Products table -->
-        <div class="bg-white p-8 shadow-lg">
-            <h2 class="text-2xl font-semibold mb-6 tracking-tight" style="font-family: 'Playfair Display', serif;">
-                Products</h2>
-            <div id="productsTable" class="overflow-x-auto">
-                <!-- table rendered here -->
+        <!-- CATEGORIES SECTION (hidden by default) -->
+        <div id="categoriesSection" class="hidden">
+            <!-- Add/Edit category form -->
+            <div class="bg-white p-8 shadow-lg mb-8">
+                <h2 class="text-2xl font-semibold mb-6 tracking-tight" style="font-family: 'Playfair Display', serif;">
+                    <span id="categoryFormTitle">Add Category</span>
+                </h2>
+                <form id="categoryForm" class="space-y-4">
+                    <div id="categoryFormMsg" class="hidden p-3 rounded text-sm"></div>
+
+                    <div>
+                        <label class="block text-sm tracking-widest font-semibold mb-3">CATEGORY NAME</label>
+                        <input id="categoryName" type="text" placeholder="e.g. Classic, Old Money, Casual"
+                            class="w-full luxury-input" required />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm tracking-widest font-semibold mb-3">DESCRIPTION</label>
+                        <textarea id="categoryDesc" placeholder="Brief description of this category"
+                            class="w-full luxury-input" rows="2"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm tracking-widest font-semibold mb-3">SLUG (for URL)</label>
+                        <input id="categorySlug" type="text" placeholder="e.g. classic, old-money, casual"
+                            class="w-full luxury-input" required />
+                        <p class="text-xs text-gray-500 mt-1">URL-friendly version of the name (lowercase, hyphens)</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm tracking-widest font-semibold mb-3">DISPLAY ORDER</label>
+                        <input id="categoryOrder" type="number" min="0" value="0" placeholder="0"
+                            class="w-full luxury-input" />
+                        <p class="text-xs text-gray-500 mt-1">Lower numbers appear first</p>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button type="submit" id="submitCategoryBtn"
+                            class="px-6 py-3 bg-gray-900 text-white text-sm tracking-widest hover:bg-black transition">ADD
+                            CATEGORY</button>
+                        <button type="button" id="resetCategoryBtn"
+                            class="px-6 py-3 bg-gray-300 text-gray-900 text-sm tracking-widest hover:bg-gray-400 transition"
+                            style="display:none;">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Categories table -->
+            <div class="bg-white p-8 shadow-lg">
+                <h2 class="text-2xl font-semibold mb-6 tracking-tight" style="font-family: 'Playfair Display', serif;">
+                    Categories</h2>
+                <div id="categoriesTable" class="overflow-x-auto">
+                    <!-- table rendered here -->
+                </div>
             </div>
         </div>
     </div>
@@ -196,8 +313,9 @@
     <script>
         let adminUser = null;
         let editingId = null;
+        let editingCategoryId = null;
 
-        // Demo credentials (in production, use Supabase Auth)
+        // Demo credentials
         const DEMO_ADMIN = {
             email: 'mzineddine03@gmail.com',
             password: '0790880944'
@@ -210,6 +328,8 @@
                     adminUser = JSON.parse(stored);
                     showAdminPanel();
                     loadProducts();
+                    loadCategories();
+                    loadCategorySelect();
                 } catch (e) {
                     localStorage.removeItem('admin:vintage');
                 }
@@ -219,13 +339,14 @@
         async function adminLogin(email, password) {
             const msg = document.getElementById('adminAuthMsg');
 
-            // Demo authentication (for development only)
             if (email === DEMO_ADMIN.email && password === DEMO_ADMIN.password) {
                 adminUser = { email, loginTime: new Date().toISOString() };
                 localStorage.setItem('admin:vintage', JSON.stringify(adminUser));
                 msg.textContent = '';
                 showAdminPanel();
                 loadProducts();
+                loadCategories();
+                loadCategorySelect();
                 document.getElementById('adminAuthForm').reset();
                 return;
             }
@@ -243,11 +364,230 @@
             localStorage.removeItem('admin:vintage');
             adminUser = null;
             editingId = null;
+            editingCategoryId = null;
             document.getElementById('adminPanel').classList.add('hidden');
             document.getElementById('authScreen').classList.remove('hidden');
             document.getElementById('adminAuthMsg').textContent = '';
         }
 
+        // Tab switching
+        document.getElementById('tabProducts').addEventListener('click', function () {
+            document.getElementById('tabProducts').classList.add('active');
+            document.getElementById('tabCategories').classList.remove('active');
+            document.getElementById('productsSection').classList.remove('hidden');
+            document.getElementById('categoriesSection').classList.add('hidden');
+        });
+
+        document.getElementById('tabCategories').addEventListener('click', function () {
+            document.getElementById('tabCategories').classList.add('active');
+            document.getElementById('tabProducts').classList.remove('active');
+            document.getElementById('categoriesSection').classList.remove('hidden');
+            document.getElementById('productsSection').classList.add('hidden');
+        });
+
+        // Load categories into select dropdown
+        async function loadCategorySelect() {
+            const select = document.getElementById('productCategory');
+            if (!select) return;
+
+            const categories = await fetchCategories();
+            select.innerHTML = '<option value="">Select a category</option>';
+
+            categories.sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
+
+            categories.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat.id;
+                option.textContent = cat.name;
+                select.appendChild(option);
+            });
+        }
+
+        // Load categories for table
+        async function loadCategories() {
+            const categories = await fetchCategories();
+            renderCategoriesTable(categories);
+        }
+
+        function renderCategoriesTable(categories) {
+            const table = document.getElementById('categoriesTable');
+            if (!table) return;
+
+            if (categories.length === 0) {
+                table.innerHTML = '<p class="text-gray-600">No categories yet. Create your first category above.</p>';
+                return;
+            }
+
+            let html = `
+                <table class="luxury-table">
+                    <thead>
+                        <tr>
+                            <th>NAME</th>
+                            <th>SLUG</th>
+                            <th>DESCRIPTION</th>
+                            <th>ORDER</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            categories.sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
+
+            categories.forEach(c => {
+                html += `
+                    <tr>
+                        <td><strong>${c.name}</strong></td>
+                        <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">${c.slug}</code></td>
+                        <td>${c.description || ''}</td>
+                        <td>${c.display_order || 0}</td>
+                        <td class="flex gap-2">
+                            <button class="px-3 py-1 bg-gray-800 text-white rounded text-xs tracking-widest hover:bg-black transition" onclick="editCategory(${c.id})">EDIT</button>
+                            <button class="px-3 py-1 bg-red-600 text-white rounded text-xs tracking-widest hover:bg-red-700 transition" onclick="deleteCategory(${c.id})">DELETE</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+            table.innerHTML = html;
+        }
+
+        async function fetchCategories() {
+            const { data, error } = await supabase.from('categories').select('*').order('display_order', { ascending: true });
+            if (error) {
+                console.error('Error fetching categories', error);
+                return [];
+            }
+            return data || [];
+        }
+
+        async function fetchCategoryById(id) {
+            const { data, error } = await supabase.from('categories').select('*').eq('id', id).maybeSingle();
+            if (error) {
+                console.error('Error fetching category', error);
+                return null;
+            }
+            return data;
+        }
+
+        async function editCategory(id) {
+            const cat = await fetchCategoryById(id);
+            if (!cat) return;
+
+            editingCategoryId = id;
+            document.getElementById('categoryFormTitle').textContent = 'Edit Category';
+            document.getElementById('categoryName').value = cat.name || '';
+            document.getElementById('categoryDesc').value = cat.description || '';
+            document.getElementById('categorySlug').value = cat.slug || '';
+            document.getElementById('categoryOrder').value = cat.display_order || 0;
+            document.getElementById('submitCategoryBtn').textContent = 'Update';
+            document.getElementById('resetCategoryBtn').style.display = 'inline-block';
+
+            // Switch to categories tab
+            document.getElementById('tabCategories').click();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        async function deleteCategory(id) {
+            // First check if any products use this category
+            const { data: products, error: checkError } = await supabase
+                .from('products')
+                .select('id')
+                .eq('category_id', id)
+                .limit(1);
+
+            if (products && products.length > 0) {
+                alert('Cannot delete category because it has products assigned to it. Move or delete the products first.');
+                return;
+            }
+
+            if (!confirm('Are you sure you want to delete this category?')) return;
+
+            const { error } = await supabase.from('categories').delete().eq('id', id);
+            if (error) {
+                console.error('Error deleting category', error);
+                alert('Error: ' + error.message);
+                return;
+            }
+
+            alert('Category deleted successfully');
+            loadCategories();
+            loadCategorySelect();
+        }
+
+        function resetCategoryForm() {
+            editingCategoryId = null;
+            document.getElementById('categoryForm').reset();
+            document.getElementById('categoryFormTitle').textContent = 'Add Category';
+            document.getElementById('submitCategoryBtn').textContent = 'ADD CATEGORY';
+            document.getElementById('resetCategoryBtn').style.display = 'none';
+        }
+
+        // Category form submission
+        document.getElementById('categoryForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('categoryName').value.trim();
+            const description = document.getElementById('categoryDesc').value.trim();
+            const slug = document.getElementById('categorySlug').value.trim().toLowerCase().replace(/\s+/g, '-');
+            const display_order = parseInt(document.getElementById('categoryOrder').value) || 0;
+
+            const msgEl = document.getElementById('categoryFormMsg');
+            msgEl.className = 'hidden p-3 rounded text-sm';
+
+            // Validate slug format
+            if (!slug.match(/^[a-z0-9-]+$/)) {
+                msgEl.textContent = 'Slug can only contain lowercase letters, numbers, and hyphens';
+                msgEl.className = 'p-3 rounded bg-red-100 text-red-700';
+                msgEl.classList.remove('hidden');
+                return;
+            }
+
+            const payload = { name, description, slug, display_order };
+
+            if (editingCategoryId) {
+                const { error } = await supabase.from('categories').update(payload).eq('id', editingCategoryId);
+                if (error) {
+                    console.error('Error updating category', error);
+                    msgEl.textContent = 'Error: ' + error.message;
+                    msgEl.className = 'p-3 rounded bg-red-100 text-red-700';
+                    msgEl.classList.remove('hidden');
+                    return;
+                }
+                alert('Category updated successfully');
+            } else {
+                const { error } = await supabase.from('categories').insert([payload]);
+                if (error) {
+                    console.error('Error creating category', error);
+                    msgEl.textContent = 'Error: ' + error.message;
+                    msgEl.className = 'p-3 rounded bg-red-100 text-red-700';
+                    msgEl.classList.remove('hidden');
+                    return;
+                }
+                alert('Category created successfully');
+            }
+
+            resetCategoryForm();
+            loadCategories();
+            loadCategorySelect();
+        });
+
+        // Reset category form button
+        document.getElementById('resetCategoryBtn').addEventListener('click', resetCategoryForm);
+
+        // Auto-generate slug from name
+        document.getElementById('categoryName').addEventListener('input', function () {
+            const slugInput = document.getElementById('categorySlug');
+            if (!slugInput.value || slugInput.value === '') {
+                slugInput.value = this.value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+            }
+        });
+
+        // Product functions
         async function loadProducts() {
             const products = await fetchProducts();
             renderProductsTable(products);
@@ -259,45 +599,67 @@
                 table.innerHTML = '<p class="text-gray-600">No products yet.</p>';
                 return;
             }
-            let html = `
-                <table class="luxury-table">
-                    <thead>
-                        <tr>
-                            <th>NAME</th>
-                            <th>PRICE</th>
-                            <th>ACTIONS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-            products.forEach(p => {
-                html += `
-                    <tr>
-                        <td><strong>${p.name}</strong></td>
-                        <td>${formatPrice(p.price)} DZ</td>
-                        <td class="flex gap-2">
-                            <button class="px-3 py-1 bg-gray-800 text-white rounded text-xs tracking-widest hover:bg-black transition" onclick="editProduct(${p.id})">EDIT</button>
-                            <button class="px-3 py-1 bg-red-600 text-white rounded text-xs tracking-widest hover:bg-red-700 transition" onclick="deleteProduct(${p.id})">DELETE</button>
-                        </td>
-                    </tr>
+
+            // Also get categories for display
+            fetchCategories().then(categories => {
+                const categoryMap = {};
+                categories.forEach(c => categoryMap[c.id] = c.name);
+
+                let html = `
+                    <table class="luxury-table">
+                        <thead>
+                            <tr>
+                                <th>NAME</th>
+                                <th>CATEGORY</th>
+                                <th>PRICE</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                 `;
+                products.forEach(p => {
+                    html += `
+                        <tr>
+                            <td><strong>${p.name}</strong></td>
+                            <td>${categoryMap[p.category_id] || '<span class="text-gray-400">Uncategorized</span>'}</td>
+                            <td>${formatPrice(p.price)} DZ</td>
+                            <td class="flex gap-2">
+                                <button class="px-3 py-1 bg-gray-800 text-white rounded text-xs tracking-widest hover:bg-black transition" onclick="editProduct(${p.id})">EDIT</button>
+                                <button class="px-3 py-1 bg-red-600 text-white rounded text-xs tracking-widest hover:bg-red-700 transition" onclick="deleteProduct(${p.id})">DELETE</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                html += `
+                        </tbody>
+                    </table>
+                `;
+                table.innerHTML = html;
             });
-            html += `
-                    </tbody>
-                </table>
-            `;
-            table.innerHTML = html;
         }
 
         async function editProduct(id) {
             const p = await fetchProductById(id);
             if (!p) return;
+
             editingId = id;
             document.getElementById('formTitle').textContent = 'Edit Product';
             document.getElementById('productName').value = p.name;
             document.getElementById('productDesc').value = p.description || '';
             document.getElementById('productPrice').value = p.price;
+            document.getElementById('productCategory').value = p.category_id || '';
             document.getElementById('productImage').value = p.image_url || '';
+
+            // Handle sizes and colors
+            if (p.available_sizes) {
+                const sizes = Array.isArray(p.available_sizes) ? p.available_sizes.join(', ') : p.available_sizes;
+                document.getElementById('productSizes').value = sizes;
+            }
+            if (p.available_colors) {
+                const colors = Array.isArray(p.available_colors) ? p.available_colors.join(', ') : p.available_colors;
+                document.getElementById('productColors').value = colors;
+            }
+
             // preview existing image
             const preview = document.getElementById('productPreview');
             if (p.image_url) {
@@ -307,8 +669,12 @@
                 preview.src = '';
                 preview.classList.add('hidden');
             }
+
             document.getElementById('submitBtn').textContent = 'Update';
             document.getElementById('resetBtn').style.display = 'inline-block';
+
+            // Switch to products tab
+            document.getElementById('tabProducts').click();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -324,7 +690,7 @@
             document.getElementById('formTitle').textContent = 'Add Product';
             document.getElementById('submitBtn').textContent = 'Add';
             document.getElementById('resetBtn').style.display = 'none';
-            // clear preview and file input
+
             const preview = document.getElementById('productPreview');
             if (preview) { preview.src = ''; preview.classList.add('hidden'); }
             const fileInput = document.getElementById('productFile');
@@ -337,7 +703,8 @@
         document.getElementById('adminAuthForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('adminEmail').value;
-            await adminLogin(email);
+            const password = document.getElementById('adminPassword').value;
+            await adminLogin(email, password);
         });
 
         document.getElementById('logoutBtn').addEventListener('click', logout);
@@ -347,6 +714,15 @@
             const name = document.getElementById('productName').value;
             const desc = document.getElementById('productDesc').value;
             const price = parseFloat(document.getElementById('productPrice').value);
+            const category_id = document.getElementById('productCategory').value || null;
+
+            // Get sizes and colors
+            const sizesInput = document.getElementById('productSizes').value;
+            const colorsInput = document.getElementById('productColors').value;
+
+            const available_sizes = sizesInput ? sizesInput.split(',').map(s => s.trim()).filter(s => s) : [];
+            const available_colors = colorsInput ? colorsInput.split(',').map(c => c.trim()).filter(c => c) : [];
+
             const imageUrlInput = document.getElementById('productImage').value.trim();
             const fileInput = document.getElementById('productFile');
             const removeChecked = document.getElementById('removeImage').checked;
@@ -355,6 +731,7 @@
             let finalImageUrl = '';
             const msgEl = document.getElementById('productFormMsg');
             if (msgEl) { msgEl.className = 'hidden p-3 rounded text-sm'; msgEl.textContent = ''; }
+
             // if user selected a file, upload it to Supabase Storage
             if (fileInput && fileInput.files && fileInput.files.length > 0) {
                 const file = fileInput.files[0];
@@ -363,45 +740,24 @@
                     const { data: uploadData, error: uploadError } = await supabase.storage.from('product-images').upload(filePath, file, { cacheControl: '3600', upsert: false, contentType: file.type });
                     if (uploadError) {
                         console.error('Upload error', uploadError);
-                        if (msgEl) { msgEl.textContent = 'Upload error — see console. Details: ' + JSON.stringify(uploadError); msgEl.className = 'p-3 rounded bg-red-100 text-red-700'; }
-                        // attempt fallback to provided URL if available
                         if (imageUrlInput) {
                             finalImageUrl = imageUrlInput;
                             if (msgEl) { msgEl.textContent = 'Image upload failed, using provided URL instead. Upload error: ' + (uploadError.message || uploadError.name || JSON.stringify(uploadError)); msgEl.className = 'p-3 rounded bg-yellow-50 text-yellow-800'; }
                         } else {
-                            // try to list the `images` folder in the bucket for diagnostics
-                            try {
-                                const { data: listData, error: listError } = await supabase.storage.from('product-images').list('images', { limit: 20 });
-                                console.error('Bucket images list check', listError, listData);
-                                if (msgEl) { msgEl.textContent = 'Image upload failed and no URL provided. Check bucket/images exists and is public. See console for details. Bucket list: ' + JSON.stringify(listError || listData); msgEl.className = 'p-3 rounded bg-red-100 text-red-700'; }
-                            } catch (le) {
-                                console.error('Bucket images list exception', le);
-                                if (msgEl) { msgEl.textContent = 'Image upload failed and images folder check failed. See console. Exception: ' + (le.message || le.name); msgEl.className = 'p-3 rounded bg-red-100 text-red-700'; }
-                            }
+                            if (msgEl) { msgEl.textContent = 'Image upload failed. ' + JSON.stringify(uploadError); msgEl.className = 'p-3 rounded bg-red-100 text-red-700'; }
                             return;
                         }
                     } else {
-                        console.log('Upload success', uploadData);
-                        if (msgEl) { msgEl.textContent = 'Upload response: ' + JSON.stringify(uploadData); msgEl.className = 'p-3 rounded bg-green-50 text-green-800'; }
                         const { data: urlData } = supabase.storage.from('product-images').getPublicUrl(filePath);
                         finalImageUrl = urlData && urlData.publicUrl ? urlData.publicUrl : '';
-                        if (msgEl && finalImageUrl) { msgEl.innerHTML += '\nPublic URL: ' + finalImageUrl; }
-                        // verify file exists in bucket/images (diagnostic)
-                        try {
-                            const { data: listAfter, error: listErr } = await supabase.storage.from('product-images').list('images', { limit: 100 });
-                            console.log('Bucket images contents (sample):', listAfter, listErr);
-                            if (msgEl) { msgEl.innerHTML += '\nBucket images sample count: ' + (listAfter ? listAfter.length : 0); }
-                        } catch (le) {
-                            console.error('List after upload exception', le);
-                        }
                     }
                 } catch (err) {
                     console.error('Upload exception', err);
                     if (imageUrlInput) {
                         finalImageUrl = imageUrlInput;
-                        if (msgEl) { msgEl.textContent = 'Image upload error, using provided URL: ' + (err.message || err.name); msgEl.className = 'p-3 rounded bg-yellow-50 text-yellow-800'; }
+                        if (msgEl) { msgEl.textContent = 'Image upload error, using provided URL'; msgEl.className = 'p-3 rounded bg-yellow-50 text-yellow-800'; }
                     } else {
-                        if (msgEl) { msgEl.textContent = 'Image upload error: ' + (err.message || err.name); msgEl.className = 'p-3 rounded bg-red-100 text-red-700'; }
+                        if (msgEl) { msgEl.textContent = 'Image upload error'; msgEl.className = 'p-3 rounded bg-red-100 text-red-700'; }
                         return;
                     }
                 }
@@ -411,11 +767,21 @@
                 finalImageUrl = imageUrlInput;
             }
 
+            const payload = {
+                name,
+                description: desc,
+                price,
+                image_url: finalImageUrl,
+                category_id,
+                available_sizes,
+                available_colors
+            };
+
             if (editingId) {
-                await adminUpdateProduct(editingId, { name, description: desc, price, image_url: finalImageUrl });
+                await adminUpdateProduct(editingId, payload);
                 resetForm();
             } else {
-                await adminCreateProduct({ name, description: desc, price, image_url: finalImageUrl });
+                await adminCreateProduct(payload);
                 document.getElementById('productForm').reset();
             }
             loadProducts();
@@ -430,30 +796,6 @@
             }
         });
 
-        // diagnostics: check bucket listing when requested
-        const checkBucketBtn = document.getElementById('checkBucketBtn');
-        if (checkBucketBtn) {
-            checkBucketBtn.addEventListener('click', async () => {
-                const msgEl = document.getElementById('productFormMsg');
-                try {
-                    const { data, error } = await supabase.storage.from('product-images').list('images', { limit: 50 });
-                    if (error) {
-                        console.error('Bucket images list error', error);
-                        msgEl.textContent = 'Bucket images list error: ' + (error.message || error.name || 'unknown');
-                        msgEl.className = 'p-3 rounded bg-red-100 text-red-700';
-                    } else {
-                        console.log('Bucket images list', data);
-                        msgEl.textContent = `product-images/images has ${data.length} items (logged to console).`;
-                        msgEl.className = 'p-3 rounded bg-green-50 text-green-800';
-                    }
-                } catch (err) {
-                    console.error('Bucket images list exception', err);
-                    msgEl.textContent = 'Bucket images list exception: ' + (err.message || err.name);
-                    msgEl.className = 'p-3 rounded bg-red-100 text-red-700';
-                }
-            });
-        }
-
         // preview selected file immediately
         const productFileEl = document.getElementById('productFile');
         const productPreviewEl = document.getElementById('productPreview');
@@ -466,7 +808,7 @@
                 }
             });
         }
-        // update preview when URL input changes
+
         const productImageInput = document.getElementById('productImage');
         if (productImageInput) {
             productImageInput.addEventListener('input', (e) => {
@@ -478,32 +820,21 @@
             });
         }
 
-        // Admin auth form
-        document.getElementById('adminAuthForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('adminEmail').value;
-            const password = document.getElementById('adminPassword').value;
-            await adminLogin(email, password);
-        });
-
-        // Logout
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            if (confirm('Are you sure you want to logout?')) {
-                logout();
-            }
+        // Logout mobile
+        document.getElementById('logoutBtnMobile').addEventListener('click', () => {
+            if (confirm('Are you sure you want to logout?')) logout();
         });
 
         // Initial check
         checkAdminAuth();
-        // Mobile menu toggle (admin)
+
+        // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', () => {
             if (!mobileMenu) return;
             mobileMenu.classList.toggle('hidden');
         });
-        const logoutBtnMobile = document.getElementById('logoutBtnMobile');
-        if (logoutBtnMobile) logoutBtnMobile.addEventListener('click', () => { if (confirm('Are you sure you want to logout?')) logout(); });
     </script>
 </body>
 
