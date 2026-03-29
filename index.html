@@ -244,9 +244,13 @@
 <body class="bg-[#faf7f2] text-[#2c2c2c]">
     <!-- Hero Section with Video Background -->
     <div class="hero-section min-h-screen flex flex-col">
-        <!-- Video Background -->
-       <img src="/images/rixx.jpg" alt="Background">
-
+          <!-- Video Background -->
+        <video class="hero-video" autoplay loop muted playsinline>
+            <!-- REPLACE THIS WITH YOUR VIDEO PATH -->
+            <source src="/images/video.mp4" type="video/mp4">
+            <!-- Fallback image if video doesn't load -->
+            <img src="/images/fallback-image.jpg" alt="Background">
+        </video>
         <!-- Overlay -->
         <div class="hero-overlay"></div>
 
