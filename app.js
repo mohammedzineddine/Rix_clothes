@@ -911,7 +911,12 @@ async function initProductDetail() {
     }
 }
 
-//---new
+console.log('✅ app.js loaded with Telegram integration');
+console.log('📱 Test Telegram: run testTelegramBot() in console');
+
+
+//------new
+
 
 // Add these functions to app.js
 
@@ -995,7 +1000,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (document.getElementById('products')) {
         const products = await fetchProducts();
         renderProductsWithFilter(products);
-        
+
         // Create category filter buttons
         const categories = await fetchCategories();
         if (categories.length > 0 && document.getElementById('categoryFilters')) {
@@ -1040,7 +1045,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 function renderCategoryFilters(categories) {
     const filterContainer = document.getElementById('categoryFilters');
     if (!filterContainer) return;
-    
+
     filterContainer.innerHTML = `
         <button class="category-filter active px-4 py-2 bg-gray-900 text-white text-sm tracking-widest hover:bg-black transition" data-category="all">
             ALL
@@ -1051,10 +1056,10 @@ function renderCategoryFilters(categories) {
             </button>
         `).join('')}
     `;
-    
+
     // Add click handlers
     document.querySelectorAll('.category-filter').forEach(btn => {
-        btn.addEventListener('click', async function() {
+        btn.addEventListener('click', async function () {
             // Update active state
             document.querySelectorAll('.category-filter').forEach(b => {
                 b.classList.remove('active', 'bg-gray-900', 'text-white');
@@ -1062,7 +1067,7 @@ function renderCategoryFilters(categories) {
             });
             this.classList.add('active', 'bg-gray-900', 'text-white');
             this.classList.remove('border', 'border-gray-300', 'text-gray-700', 'hover:bg-gray-100');
-            
+
             // Filter products
             const categoryId = this.dataset.category;
             let products;
@@ -1089,8 +1094,3 @@ async function fetchProductsByCategory(categoryId) {
     }
     return data || [];
 }
-
-
-console.log('✅ app.js loaded with Telegram integration');
-
-console.log('📱 Test Telegram: run testTelegramBot() in console');

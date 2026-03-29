@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#1a1a1a" />
+    <meta name="theme-color" content="#1a2c3e" />
     <link rel="manifest" href="/manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,11 +12,24 @@
     <title>Admin — RIX CLOTHES</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
+        /* Ralph Lauren Theme Colors */
+        :root {
+            --rl-navy: #1a2c3e;
+            --rl-deep-navy: #0f1e2c;
+            --rl-gold: #b89a5c;
+            --rl-dark-gold: #8b6b3e;
+            --rl-charcoal: #2c2c2c;
+            --rl-off-white: #faf7f2;
+            --rl-border: #e5d9cc;
+        }
+
         body {
-            font-family: 'Lora', serif;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--rl-off-white);
+            color: var(--rl-charcoal);
         }
 
         h1,
@@ -25,27 +38,35 @@
         h4,
         h5,
         h6 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.02em;
         }
 
+        /* Luxury Navigation */
         .luxury-bg {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: var(--rl-deep-navy);
+            border-bottom: 1px solid var(--rl-gold);
         }
 
+        /* Form Inputs - Ralph Lauren Style */
         .luxury-input {
-            border: 1px solid #d1d5db;
-            padding: 10px;
+            border: 1px solid var(--rl-border);
+            padding: 12px 16px;
             font-size: 14px;
-            font-family: 'Lora', serif;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            background-color: white;
+            border-radius: 0;
         }
 
         .luxury-input:focus {
             outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+            border-color: var(--rl-gold);
+            box-shadow: 0 0 0 2px rgba(184, 154, 92, 0.1);
         }
 
+        /* Tables - Ralph Lauren Style */
         .luxury-table {
             width: 100%;
             border-collapse: collapse;
@@ -53,104 +74,233 @@
         }
 
         .luxury-table thead {
-            background-color: #f9fafb;
-            border-bottom: 2px solid #d4af37;
+            background-color: var(--rl-off-white);
+            border-bottom: 2px solid var(--rl-gold);
         }
 
         .luxury-table th {
-            padding: 12px;
+            padding: 14px 12px;
             text-align: left;
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 0.1em;
             font-weight: 600;
-            color: #1a1a1a;
+            text-transform: uppercase;
+            color: var(--rl-navy);
+            font-family: 'Montserrat', sans-serif;
         }
 
         .luxury-table td {
-            padding: 12px;
-            border-bottom: 1px solid #e5e7eb;
+            padding: 14px 12px;
+            border-bottom: 1px solid var(--rl-border);
+            font-size: 14px;
         }
 
+        .luxury-table tr:hover {
+            background-color: var(--rl-off-white);
+        }
+
+        /* Tab Buttons */
         .tab-btn {
-            padding: 12px 24px;
-            font-size: 14px;
+            padding: 12px 28px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: 0.05em;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .tab-btn.active {
-            border-bottom-color: #d4af37;
-            color: #d4af37;
+            border-bottom-color: var(--rl-gold);
+            color: var(--rl-gold);
         }
 
+        .tab-btn:hover:not(.active) {
+            color: var(--rl-gold);
+            border-bottom-color: var(--rl-border);
+        }
+
+        /* Gold Accents */
         .rix-gold {
-            color: #d4af37;
+            color: var(--rl-gold);
         }
 
         .rix-bg-gold {
-            background-color: #d4af37;
+            background-color: var(--rl-gold);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: var(--rl-navy);
+            color: white;
+            padding: 12px 28px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--rl-deep-navy);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: #e5e7eb;
+            color: var(--rl-charcoal);
+            padding: 12px 28px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d1d5db;
+        }
+
+        .btn-danger {
+            background-color: #9b2c2c;
+            color: white;
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-danger:hover {
+            background-color: #7f1a1a;
+        }
+
+        .btn-warning {
+            background-color: #dc2626;
+            color: white;
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-warning:hover {
+            background-color: #b91c1c;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border: 1px solid var(--rl-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Auth Screen */
+        .auth-container {
+            max-width: 480px;
+            margin: 80px auto;
+            background: white;
+            border: 1px solid var(--rl-border);
+            padding: 40px;
+        }
+
+        /* Image Preview */
+        .image-preview {
+            border: 1px solid var(--rl-border);
+            background: var(--rl-off-white);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            background: white;
+            border-top: 1px solid var(--rl-border);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--rl-off-white);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--rl-gold);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--rl-dark-gold);
         }
     </style>
 </head>
 
-<body class="bg-white text-gray-900">
+<body class="bg-[#faf7f2] text-[#2c2c2c]">
     <nav class="luxury-bg text-white sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="index.html" class="text-3xl font-bold tracking-wider rix-gold"
-                style="font-family: 'Playfair Display', serif;">ADMIN PANEL</a>
+            <a href="index.html" class="text-2xl font-bold tracking-wider rix-gold"
+                style="font-family: 'Cormorant Garamond', serif; letter-spacing: 2px;">ADMIN PANEL</a>
             <div class="hidden md:flex items-center gap-4">
                 <button id="logoutBtn"
-                    class="px-4 py-2 bg-red-600 text-white text-sm tracking-widest hover:bg-red-700 transition rounded">LOGOUT</button>
+                    class="px-5 py-2 bg-transparent border border-rix-gold text-rix-gold text-xs tracking-widest hover:bg-rix-gold hover:text-gray-900 transition rounded-none">LOGOUT</button>
             </div>
             <div class="md:hidden">
-                <button id="mobileMenuBtn" class="p-2 rounded-md bg-white text-gray-900"
+                <button id="mobileMenuBtn" class="p-2 rounded-none bg-rix-gold text-gray-900"
                     aria-label="Toggle menu">☰</button>
             </div>
         </div>
-        <div id="mobileMenu" class="md:hidden bg-white px-6 pb-4 hidden">
-            <button id="logoutBtnMobile" class="w-full text-left py-3 text-red-600">Logout</button>
+        <div id="mobileMenu" class="md:hidden mobile-menu px-6 pb-4 hidden">
+            <button id="logoutBtnMobile" class="w-full text-left py-3 text-rix-gold">Logout</button>
         </div>
     </nav>
 
     <!-- Auth screen -->
-    <div id="authScreen" class="max-w-md mx-auto mt-16 bg-white p-8 shadow-lg">
-        <h1 class="text-4xl font-bold mb-8 text-center tracking-tight" style="font-family: 'Playfair Display', serif;">
-            Admin Access</h1>
-        <form id="adminAuthForm" class="space-y-4">
+    <div id="authScreen" class="auth-container">
+        <h1 class="text-4xl font-bold mb-8 text-center" style="font-family: 'Cormorant Garamond', serif;">
+            Admin Access
+        </h1>
+        <form id="adminAuthForm" class="space-y-5">
             <div>
-                <label class="block text-sm tracking-widest font-semibold mb-3">EMAIL</label>
-                <input id="adminEmail" type="email" placeholder="admin@vintage.local" class="w-full luxury-input"
+                <label class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">EMAIL</label>
+                <input id="adminEmail" type="email" placeholder="admin@rixclothes.com" class="w-full luxury-input"
                     required />
             </div>
             <div>
-                <label class="block text-sm tracking-widest font-semibold mb-3">PASSWORD</label>
+                <label class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">PASSWORD</label>
                 <input id="adminPassword" type="password" placeholder="Password" class="w-full luxury-input" required />
             </div>
-            <button type="submit"
-                class="w-full px-4 py-3 bg-gray-900 text-white text-sm tracking-widest hover:bg-black transition mt-6">SIGN
-                IN</button>
+            <button type="submit" class="w-full btn-primary mt-4">SIGN IN</button>
         </form>
-        <p id="adminAuthMsg" class="text-sm text-gray-600 mt-2 text-center"></p>
-        <hr class="my-4">
+        <p id="adminAuthMsg" class="text-sm text-gray-600 mt-4 text-center"></p>
     </div>
 
     <!-- Admin panel (hidden until auth) -->
     <div id="adminPanel" class="hidden max-w-7xl mx-auto px-6 py-12">
-        <div class="flex items-center justify-between mb-8">
-            <h1 class="text-4xl font-bold tracking-tight" style="font-family: 'Playfair Display', serif;">
+        <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+            <h1 class="text-4xl font-bold tracking-tight" style="font-family: 'Cormorant Garamond', serif;">
                 Store Management
             </h1>
-            <button id="generateBtn"
-                class="px-6 py-3 bg-gray-900 text-white text-sm tracking-widest hover:bg-black transition">
+            <button id="generateBtn" class="btn-secondary">
                 GENERATE SAMPLES
             </button>
         </div>
 
         <!-- Admin Tabs -->
-        <div class="border-b border-gray-200 mb-8">
-            <div class="flex gap-4">
+        <div class="border-b border-[#e5d9cc] mb-8">
+            <div class="flex gap-2">
                 <button id="tabProducts" class="tab-btn active">PRODUCTS</button>
                 <button id="tabCategories" class="tab-btn">CATEGORIES</button>
             </div>
@@ -159,39 +309,45 @@
         <!-- PRODUCTS SECTION -->
         <div id="productsSection">
             <!-- Add/Edit product form -->
-            <div class="bg-white p-8 shadow-lg mb-8">
-                <h2 class="text-2xl font-semibold mb-6 tracking-tight" style="font-family: 'Playfair Display', serif;">
+            <div class="card p-8 mb-8">
+                <h2 class="text-2xl font-semibold mb-6 tracking-tight"
+                    style="font-family: 'Cormorant Garamond', serif;">
                     <span id="formTitle">Add Product</span>
                 </h2>
-                <form id="productForm" class="space-y-4">
+                <form id="productForm" class="space-y-5">
                     <div id="productFormMsg" class="hidden p-3 rounded text-sm"></div>
                     <div class="text-right">
-                        <button type="button" id="checkBucketBtn" class="px-3 py-1 text-xs bg-gray-100 rounded">Check
-                            storage bucket</button>
+                        <button type="button" id="checkBucketBtn"
+                            class="text-xs text-gray-500 hover:text-rix-gold transition">Check storage bucket</button>
                     </div>
 
                     <!-- Category Selection -->
                     <div>
-                        <label class="block text-sm tracking-widest font-semibold mb-3">CATEGORY</label>
+                        <label
+                            class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">CATEGORY</label>
                         <select id="productCategory" class="w-full luxury-input" required>
                             <option value="">Select a category</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-sm tracking-widest font-semibold mb-3">PRODUCT NAME</label>
+                        <label class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">PRODUCT
+                            NAME</label>
                         <input id="productName" type="text" placeholder="e.g. Classic Denim Jacket"
                             class="w-full luxury-input" required />
                     </div>
                     <div>
-                        <label class="block text-sm tracking-widest font-semibold mb-3">DESCRIPTION</label>
+                        <label
+                            class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">DESCRIPTION</label>
                         <textarea id="productDesc" placeholder="Brief description" class="w-full luxury-input"
                             rows="3"></textarea>
                     </div>
 
                     <!-- Available Sizes -->
                     <div>
-                        <label class="block text-sm tracking-widest font-semibold mb-3">AVAILABLE SIZES</label>
+                        <label
+                            class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">AVAILABLE
+                            SIZES</label>
                         <input id="productSizes" type="text" placeholder="e.g. S, M, L, XL (comma separated)"
                             class="w-full luxury-input" />
                         <p class="text-xs text-gray-500 mt-1">Separate sizes with commas</p>
@@ -199,7 +355,9 @@
 
                     <!-- Available Colors -->
                     <div>
-                        <label class="block text-sm tracking-widest font-semibold mb-3">AVAILABLE COLORS</label>
+                        <label
+                            class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">AVAILABLE
+                            COLORS</label>
                         <input id="productColors" type="text" placeholder="e.g. Black, Blue, Red (comma separated)"
                             class="w-full luxury-input" />
                         <p class="text-xs text-gray-500 mt-1">Separate colors with commas</p>
@@ -207,41 +365,42 @@
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm tracking-widest font-semibold mb-3">PRICE (DZ)</label>
+                            <label
+                                class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">PRICE
+                                (DZ)</label>
                             <input id="productPrice" type="number" step="0.01" placeholder="49.99"
                                 class="w-full luxury-input" required />
                         </div>
                         <div>
-                            <label class="block text-sm tracking-widest font-semibold mb-3">IMAGE</label>
+                            <label
+                                class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">IMAGE</label>
                             <div class="space-y-2">
-                                <input id="productFile" type="file" accept="image/*" class="w-full" />
+                                <input id="productFile" type="file" accept="image/*" class="w-full text-sm" />
                                 <input id="productImage" type="url" placeholder="Or paste an image URL (https://...)"
                                     class="w-full luxury-input" />
                                 <div class="flex items-center gap-2">
-                                    <input id="removeImage" type="checkbox" class="h-4 w-4" />
+                                    <input id="removeImage" type="checkbox" class="h-4 w-4 accent-rix-gold" />
                                     <label for="removeImage" class="text-sm tracking-widest">Remove current image
                                         URL</label>
                                 </div>
                                 <div id="productPreviewWrap" class="mt-2">
                                     <img id="productPreview" src="" alt="preview"
-                                        class="w-32 h-32 object-cover rounded hidden">
+                                        class="w-32 h-32 object-cover border border-[#e5d9cc] hidden">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="flex gap-2">
-                        <button type="submit" id="submitBtn"
-                            class="px-6 py-3 bg-gray-900 text-white text-sm tracking-widest hover:bg-black transition">ADD</button>
-                        <button type="button" id="resetBtn"
-                            class="px-6 py-3 bg-gray-300 text-gray-900 text-sm tracking-widest hover:bg-gray-400 transition"
-                            style="display:none;">Cancel</button>
+                    <div class="flex gap-3">
+                        <button type="submit" id="submitBtn" class="btn-primary">ADD</button>
+                        <button type="button" id="resetBtn" class="btn-secondary" style="display:none;">Cancel</button>
                     </div>
                 </form>
             </div>
 
             <!-- Products table -->
-            <div class="bg-white p-8 shadow-lg">
-                <h2 class="text-2xl font-semibold mb-6 tracking-tight" style="font-family: 'Playfair Display', serif;">
+            <div class="card p-8">
+                <h2 class="text-2xl font-semibold mb-6 tracking-tight"
+                    style="font-family: 'Cormorant Garamond', serif;">
                     Products</h2>
                 <div id="productsTable" class="overflow-x-auto">
                     <!-- table rendered here -->
@@ -252,53 +411,56 @@
         <!-- CATEGORIES SECTION (hidden by default) -->
         <div id="categoriesSection" class="hidden">
             <!-- Add/Edit category form -->
-            <div class="bg-white p-8 shadow-lg mb-8">
-                <h2 class="text-2xl font-semibold mb-6 tracking-tight" style="font-family: 'Playfair Display', serif;">
+            <div class="card p-8 mb-8">
+                <h2 class="text-2xl font-semibold mb-6 tracking-tight"
+                    style="font-family: 'Cormorant Garamond', serif;">
                     <span id="categoryFormTitle">Add Category</span>
                 </h2>
-                <form id="categoryForm" class="space-y-4">
+                <form id="categoryForm" class="space-y-5">
                     <div id="categoryFormMsg" class="hidden p-3 rounded text-sm"></div>
 
                     <div>
-                        <label class="block text-sm tracking-widest font-semibold mb-3">CATEGORY NAME</label>
+                        <label class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">CATEGORY
+                            NAME</label>
                         <input id="categoryName" type="text" placeholder="e.g. Classic, Old Money, Casual"
                             class="w-full luxury-input" required />
                     </div>
 
                     <div>
-                        <label class="block text-sm tracking-widest font-semibold mb-3">DESCRIPTION</label>
+                        <label
+                            class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">DESCRIPTION</label>
                         <textarea id="categoryDesc" placeholder="Brief description of this category"
                             class="w-full luxury-input" rows="2"></textarea>
                     </div>
 
                     <div>
-                        <label class="block text-sm tracking-widest font-semibold mb-3">SLUG (for URL)</label>
+                        <label class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">SLUG
+                            (for URL)</label>
                         <input id="categorySlug" type="text" placeholder="e.g. classic, old-money, casual"
                             class="w-full luxury-input" required />
                         <p class="text-xs text-gray-500 mt-1">URL-friendly version of the name (lowercase, hyphens)</p>
                     </div>
 
                     <div>
-                        <label class="block text-sm tracking-widest font-semibold mb-3">DISPLAY ORDER</label>
+                        <label class="block text-xs tracking-widest font-semibold mb-2 uppercase text-gray-600">DISPLAY
+                            ORDER</label>
                         <input id="categoryOrder" type="number" min="0" value="0" placeholder="0"
                             class="w-full luxury-input" />
                         <p class="text-xs text-gray-500 mt-1">Lower numbers appear first</p>
                     </div>
 
-                    <div class="flex gap-2">
-                        <button type="submit" id="submitCategoryBtn"
-                            class="px-6 py-3 bg-gray-900 text-white text-sm tracking-widest hover:bg-black transition">ADD
-                            CATEGORY</button>
-                        <button type="button" id="resetCategoryBtn"
-                            class="px-6 py-3 bg-gray-300 text-gray-900 text-sm tracking-widest hover:bg-gray-400 transition"
+                    <div class="flex gap-3">
+                        <button type="submit" id="submitCategoryBtn" class="btn-primary">ADD CATEGORY</button>
+                        <button type="button" id="resetCategoryBtn" class="btn-secondary"
                             style="display:none;">Cancel</button>
                     </div>
                 </form>
             </div>
 
             <!-- Categories table -->
-            <div class="bg-white p-8 shadow-lg">
-                <h2 class="text-2xl font-semibold mb-6 tracking-tight" style="font-family: 'Playfair Display', serif;">
+            <div class="card p-8">
+                <h2 class="text-2xl font-semibold mb-6 tracking-tight"
+                    style="font-family: 'Cormorant Garamond', serif;">
                     Categories</h2>
                 <div id="categoriesTable" class="overflow-x-auto">
                     <!-- table rendered here -->
@@ -442,8 +604,8 @@
                         <td>${c.description || ''}</td>
                         <td>${c.display_order || 0}</td>
                         <td class="flex gap-2">
-                            <button class="px-3 py-1 bg-gray-800 text-white rounded text-xs tracking-widest hover:bg-black transition" onclick="editCategory(${c.id})">EDIT</button>
-                            <button class="px-3 py-1 bg-red-600 text-white rounded text-xs tracking-widest hover:bg-red-700 transition" onclick="deleteCategory(${c.id})">DELETE</button>
+                            <button class="px-3 py-1 bg-[#1a2c3e] text-white rounded text-xs tracking-widest hover:bg-[#0f1e2c] transition" onclick="editCategory(${c.id})">EDIT</button>
+                            <button class="px-3 py-1 bg-[#9b2c2c] text-white rounded text-xs tracking-widest hover:bg-[#7f1a1a] transition" onclick="deleteCategory(${c.id})">DELETE</button>
                         </td>
                     </tr>
                 `;
@@ -624,8 +786,8 @@
                             <td>${categoryMap[p.category_id] || '<span class="text-gray-400">Uncategorized</span>'}</td>
                             <td>${formatPrice(p.price)} DZ</td>
                             <td class="flex gap-2">
-                                <button class="px-3 py-1 bg-gray-800 text-white rounded text-xs tracking-widest hover:bg-black transition" onclick="editProduct(${p.id})">EDIT</button>
-                                <button class="px-3 py-1 bg-red-600 text-white rounded text-xs tracking-widest hover:bg-red-700 transition" onclick="deleteProduct(${p.id})">DELETE</button>
+                                <button class="px-3 py-1 bg-[#1a2c3e] text-white rounded text-xs tracking-widest hover:bg-[#0f1e2c] transition" onclick="editProduct(${p.id})">EDIT</button>
+                                <button class="px-3 py-1 bg-[#9b2c2c] text-white rounded text-xs tracking-widest hover:bg-[#7f1a1a] transition" onclick="deleteProduct(${p.id})">DELETE</button>
                             </td>
                         </tr>
                     `;

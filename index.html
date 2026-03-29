@@ -4,16 +4,34 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#1a1a1a" />
+    <meta name="theme-color" content="#0a2b3e" />
     <title>RIX CLOTHES — Premium Fashion</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Ralph Lauren Theme Colors */
+        :root {
+            --rl-navy: #1a2c3e;
+            --rl-deep-navy: #0f1e2c;
+            --rl-cream: #f5f0e8;
+            --rl-gold: #b89a5c;
+            --rl-dark-gold: #8b6b3e;
+            --rl-charcoal: #2c2c2c;
+            --rl-off-white: #faf7f2;
+            --rl-border: #e5d9cc;
+        }
+
+        * {
+            transition: all 0.2s ease;
+        }
+
         body {
-            font-family: 'Lora', serif;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--rl-off-white);
+            color: var(--rl-charcoal);
         }
 
         h1,
@@ -22,88 +40,228 @@
         h4,
         h5,
         h6 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.02em;
         }
 
-        .hero-bg {
-            background-image: url('/images/rixx.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        /* Hero Section with Video Background */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
-        .hero-overlay {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+        /* Video Background */
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
         }
 
+
+        /* Content */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navigation */
         .nav-bg {
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(26, 44, 62, 0.98);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(184, 154, 92, 0.3);
+            position: relative;
+            z-index: 3;
         }
 
-        .rix-gold {
-            color: #d4af37;
+        /* Gold Accents */
+        .rl-gold {
+            color: var(--rl-gold);
         }
 
-        .rix-bg-gold {
-            background-color: #d4af37;
+        .rl-bg-gold {
+            background-color: var(--rl-gold);
         }
 
-        .rix-border-gold {
-            border-color: #d4af37;
+        .rl-border-gold {
+            border-color: var(--rl-gold);
         }
 
+        .rl-hover-gold:hover {
+            color: var(--rl-gold) !important;
+        }
+
+        /* Button Styles */
+        .rl-btn-primary {
+            background-color: transparent;
+            color: var(--rl-off-white);
+            border: 2px solid var(--rl-gold);
+            padding: 12px 32px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .rl-btn-primary:hover {
+            background-color: var(--rl-gold);
+            color: var(--rl-deep-navy);
+            border-color: var(--rl-gold);
+            transform: translateY(-2px);
+        }
+
+        .rl-btn-secondary {
+            background-color: var(--rl-gold);
+            color: var(--rl-deep-navy);
+            border: 2px solid var(--rl-gold);
+            padding: 12px 32px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .rl-btn-secondary:hover {
+            background-color: var(--rl-dark-gold);
+            border-color: var(--rl-dark-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Cart Icon */
         .cart-icon {
             position: relative;
             transition: all 0.3s ease;
         }
 
-        .cart-icon:hover {
-            transform: translateY(-2px);
-        }
-
         .cart-icon:hover i {
-            color: #d4af37;
+            color: var(--rl-gold);
         }
 
-        /* Responsive image for mobile */
-        @media (max-width: 768px) {
-            .hero-bg {
-                background-size: 150% auto;
-                /* أو جرب 120% */
-                background-position: center 30%;
-            }
+        /* Product Cards */
+        .product-card {
+            background: white;
+            border: 1px solid var(--rl-border);
+            transition: all 0.3s ease;
+        }
 
-            /* لجعل الصورة في قسم Brand Story أصغر */
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            border-color: var(--rl-gold);
+        }
+
+        /* Category Filters */
+        .category-filter {
+            background: transparent;
+            border: 1px solid var(--rl-border);
+            color: var(--rl-charcoal);
+            padding: 8px 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .category-filter:hover,
+        .category-filter.active {
+            background-color: var(--rl-navy);
+            border-color: var(--rl-navy);
+            color: white;
+        }
+
+        /* Footer */
+        footer.nav-bg {
+            background: var(--rl-deep-navy);
+            border-top: 3px solid var(--rl-gold);
+        }
+
+        /* Announcement Bar */
+        .announcement-bar {
+            background-color: var(--rl-navy);
+            color: var(--rl-off-white);
+            border-bottom: 1px solid var(--rl-gold);
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Section Headers */
+        .section-header {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--rl-gold);
+        }
+
+        /* Modal */
+        #cartModal .bg-white {
+            border: 1px solid var(--rl-border);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
             .brand-story-img {
                 height: 250px !important;
+            }
+
+            .rl-btn-primary,
+            .rl-btn-secondary {
+                padding: 10px 24px;
+                font-size: 11px;
             }
         }
     </style>
 </head>
-<!-- Announcement Bar - Free Shipping Over 25000 DZD (Gold Version) -->
-<div class="bg-black text-white py-2.5 text-center text-sm font-medium tracking-wide border-b border-rix-gold/20">
+
+<!-- Announcement Bar -->
+<div class="announcement-bar text-white py-2.5 text-center text-sm font-medium tracking-wide">
     <div class="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3">
-        <svg class="w-5 h-5 rix-gold" fill="currentColor" viewBox="0 0 20 20">
+        <svg class="w-5 h-5 rl-gold" fill="currentColor" viewBox="0 0 20 20">
             <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
             <path d="M3 4h14l-1 7H4L3 4z" />
         </svg>
         <span>🚚<span class="font-semibold">التوصيل مجاني</span> للطلبات التي تتجاوز <span
-                class="font-bold rix-gold text-base mx-1">25000 دج</span></span>
-
-
+                class="font-bold rl-gold text-base mx-1">25000 دج</span></span>
     </div>
 </div>
 
-<body class="bg-white text-gray-900">
-    <!-- Hero Section with RIX Background -->
+<body class="bg-[#faf7f2] text-[#2c2c2c]">
+    <!-- Hero Section with Video Background -->
+    <div class="hero-section min-h-screen flex flex-col">
+        <!-- Video Background -->
+        <video class="hero-video" autoplay loop muted playsinline>
+            <!-- REPLACE THIS WITH YOUR VIDEO PATH -->
+            <source src="/images/video.mp4" type="video/mp4">
+            <!-- Fallback image if video doesn't load -->
+            <img src="/images/fallback-image.jpg" alt="Background">
+        </video>
 
-    <header class="hero-bg min-h-screen flex flex-col">
+        <!-- Overlay -->
+        <div class="hero-overlay"></div>
+
         <!-- Navigation -->
-        <nav class="nav-bg text-white sticky top-0 z-50">
+        <nav class="nav-bg text-white sticky top-0">
             <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-                <a href="index.html" class="text-3xl font-bold tracking-wider rix-gold"
-                    style="font-family: 'Playfair Display', serif;">RIX CLOTHES</a>
+                <a href="index.html" class="text-3xl font-bold tracking-wider"
+                    style="font-family: 'Cormorant Garamond', serif; color: var(--rl-gold); letter-spacing: 2px;">
+                    RIX CLOTHES
+                </a>
 
                 <div class="hidden md:flex items-center gap-4 text-sm tracking-widest uppercase text-gray-400">
                     <span>Classic</span>
@@ -116,56 +274,56 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <button id="cartBtn" class="cart-icon text-xl hover:rix-gold transition p-2 rounded-md"
-                        aria-label="Shopping Cart">
+                    <button id="cartBtn" class="cart-icon text-xl transition p-2 rounded-md" aria-label="Shopping Cart">
                         <i class="fas fa-shopping-bag"></i>
                         <span id="cartCount"
                             class="absolute -top-2 -right-1 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
                     </button>
-
                 </div>
             </div>
-
         </nav>
 
         <!-- Hero Content -->
-        <div class="hero-overlay flex-1 flex items-center">
+        <div class="hero-content flex-1 flex items-center">
             <div class="max-w-7xl mx-auto px-6 py-12 text-white text-center">
                 <br><br> <br><br> <br><br>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6" style="font-family: 'Cormorant Garamond', serif;">
+                    RIX
+                </h1>
                 <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed">
-                    وجهتكم النهائية للأزياء الراقية التي تجمع بين الأناقة الكلاسيكية واللمسة
-                    العصرية.
+                    وجهتكم النهائية للأزياء الراقية التي تجمع بين الأناقة<br>
+                    الكلاسيكية واللمسة العصرية.
                 </p>
                 <div class="flex gap-4 justify-center">
                     <a href="#shop"
-                        class="px-8 py-4 rix-bg-gold text-gray-900 text-sm tracking-widest hover:bg-yellow-600 transition inline-block">
+                        class="rl-btn-secondary text-gray-900 text-sm tracking-widest transition inline-block">
                         SHOP NOW
                     </a>
-
                 </div>
             </div>
         </div>
-    </header>
+    </div>
 
     <!-- Featured Products -->
-    <section id="shop" class="py-20 bg-gray-50">
+    <section id="shop" class="py-20 bg-[#faf7f2]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">Featured Collection
+                <span class="text-xs tracking-[3px] uppercase text-[#b89a5c] font-medium">Curated Selection</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-2 mb-4 section-header"
+                    style="font-family: 'Cormorant Garamond', serif;">
+                    Featured Collection
                 </h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Curated pieces that define modern elegance and
-                    sophistication.</p>
+                <p class="text-gray-600 max-w-2xl mx-auto font-light mt-6">Curated pieces that define modern elegance
+                    and sophistication.</p>
             </div>
 
-            <!-- Category Filters - Add after the "Featured Collection" heading -->
+            <!-- Category Filters -->
             <div class="flex flex-wrap justify-center gap-3 mb-8" id="categoryFilters">
-                <!-- Categories will be loaded by JavaScript -->
-                <button class="px-4 py-2 bg-gray-200 text-gray-600">Loading categories...</button>
+                <button class="category-filter">Loading categories...</button>
             </div>
 
-            <!-- Products Grid (existing) -->
+            <!-- Products Grid -->
             <div id="products" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Products will be loaded by JavaScript -->
                 <div class="text-center py-12 text-gray-500">Loading products...</div>
             </div>
         </div>
@@ -200,68 +358,64 @@
                         نفضّلو الجودة على الكثرة، والإتقان على الإنتاج العشوائي، وستايل يدوم مع الوقت. لباسنا ماشي غير
                         يبان مليح، بل يتحس مليح.
                     </p>
-
                 </div>
                 <div class="order-1 lg:order-2 h-48 sm:h-64 md:h-80 lg:h-96 rounded-lg overflow-hidden mb-8 lg:mb-0">
-                    <!-- استبدلت class هرمية بـ height متجاوبة -->
                     <img src="/images/rixx.jpg" alt="RIX Lifestyle" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="nav-bg text-white">
         <div class="max-w-7xl mx-auto px-6 py-12">
-            <!-- Main Footer Content - Simple Grid -->
             <div class="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12 mb-10">
-                <!-- Brand Info -->
                 <div class="md:w-1/2">
-                    <h3 class="text-2xl font-bold mb-3 rix-gold" style="font-family: 'Playfair Display', serif;">
+                    <h3 class="text-2xl font-bold mb-3"
+                        style="font-family: 'Cormorant Garamond', serif; color: var(--rl-gold);">
                         RIX CLOTHES
                     </h3>
                     <p class="text-gray-300 mb-4 text-sm">
                         تابعنا هنا لمزيد من الملابس بتصويرنا الخاص
                     </p>
-
-                    <!-- Social Links - Simple -->
                     <div class="flex gap-4">
                         <a href="https://www.instagram.com/rix_clothess?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-                            class="text-gray-400 hover:text-rix-gold transition">
+                            class="text-gray-400 hover:text-[#b89a5c] transition">
                             Instagram
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-rix-gold transition">
+                        <a href="#" class="text-gray-400 hover:text-[#b89a5c] transition">
                             TikTok
                         </a>
                     </div>
                 </div>
 
-                <!-- Store Links - Simple -->
                 <div class="md:w-1/2">
                     <h3 class="text-sm tracking-widest font-semibold mb-4 text-gray-200">متجرنا</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-rix-gold transition text-sm">سياسة الخصوصية</a>
+                        <li><a href="#" class="text-gray-300 hover:text-[#b89a5c] transition text-sm">سياسة الخصوصية</a>
                         </li>
-                        <li><a href="#" class="text-gray-300 hover:text-rix-gold transition text-sm">شروط الخدمة</a>
+                        <li><a href="#" class="text-gray-300 hover:text-[#b89a5c] transition text-sm">شروط الخدمة</a>
                         </li>
-                         <li><a href="#" class="text-gray-300 hover:text-rix-gold transition text-sm">Zineddine Mohamed Devs</a>
+                        <li><a href="https://www.instagram.com/mohamed.zineddinee/"
+                                class="text-gray-300 hover:text-[#b89a5c] transition text-sm"> مطور الموقع
+                                الالكتروني</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2024 RIX CLOTHES. All rights reserved.</p><a href="admin.html"
-                    class="hover:luxury-gold transition">Admin</a></p>
+                <p>&copy; 2024 RIX CLOTHES. All rights reserved.</p>
+                <a href="admin.html" class="hover:text-[#b89a5c] transition">Admin</a>
             </div>
-
         </div>
     </footer>
 
     <!-- Cart Modal -->
     <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50">
-        <div class="bg-white w-full max-w-2xl max-h-96 overflow-y-auto rounded">
+        <div class="bg-white w-full max-w-2xl max-h-96 overflow-y-auto rounded shadow-2xl">
             <div class="sticky top-0 bg-white border-b px-8 py-6 flex justify-between items-center">
-                <h2 class="text-2xl font-bold" style="font-family: 'Playfair Display', serif;">Shopping Cart</h2>
-                <button id="closeCart" class="text-gray-600 text-2xl">&times;</button>
+                <h2 class="text-2xl font-bold" style="font-family: 'Cormorant Garamond', serif;">Shopping Cart</h2>
+                <button id="closeCart" class="text-gray-600 text-2xl hover:text-[#b89a5c] transition">&times;</button>
             </div>
             <div id="cartItems" class="px-8 py-6 space-y-6">
                 <!-- cart items rendered here -->
@@ -270,9 +424,9 @@
                 <div class="text-xl font-bold">Total: <span id="cartTotal">0.00</span> DZ</div>
                 <div class="flex gap-4">
                     <button id="clearCart"
-                        class="px-6 py-2 border border-gray-400 text-gray-900 hover:bg-gray-100 transition">CLEAR</button>
+                        class="px-6 py-2 border border-gray-400 text-gray-900 hover:bg-gray-100 transition text-sm uppercase tracking-wider">CLEAR</button>
                     <button id="checkoutBtn"
-                        class="px-6 py-2 bg-gray-900 text-white hover:bg-black transition">CHECKOUT</button>
+                        class="px-6 py-2 bg-[#1a2c3e] text-white hover:bg-[#0f1e2c] transition text-sm uppercase tracking-wider">CHECKOUT</button>
                 </div>
             </div>
         </div>
@@ -282,7 +436,6 @@
     <script src="supabase.js"></script>
     <script src="app.js"></script>
     <script>
-        // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', () => {
@@ -293,4 +446,3 @@
 </body>
 
 </html>
-

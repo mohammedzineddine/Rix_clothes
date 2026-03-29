@@ -4,16 +4,29 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#1a1a1a" />
+    <meta name="theme-color" content="#1a2c3e" />
     <title>Product Details — RIX CLOTHES</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
+        /* Ralph Lauren Theme Colors */
+        :root {
+            --rl-navy: #1a2c3e;
+            --rl-deep-navy: #0f1e2c;
+            --rl-gold: #b89a5c;
+            --rl-dark-gold: #8b6b3e;
+            --rl-charcoal: #2c2c2c;
+            --rl-off-white: #faf7f2;
+            --rl-border: #e5d9cc;
+        }
+
         body {
-            font-family: 'Lora', serif;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--rl-off-white);
+            color: var(--rl-charcoal);
         }
 
         h1,
@@ -22,94 +35,114 @@
         h4,
         h5,
         h6 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.02em;
         }
 
+        /* Navigation */
         .nav-bg {
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(26, 44, 62, 0.98);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(184, 154, 92, 0.3);
         }
 
+        /* Gold Accents */
         .rix-gold {
-            color: #d4af37;
+            color: var(--rl-gold);
         }
 
         .rix-bg-gold {
-            background-color: #d4af37;
+            background-color: var(--rl-gold);
         }
 
         .rix-border-gold {
-            border-color: #d4af37;
+            border-color: var(--rl-gold);
         }
 
+        /* Form Inputs */
         .luxury-input {
-            border: 1px solid #d1d5db;
-            padding: 10px;
+            border: 1px solid var(--rl-border);
+            padding: 12px 16px;
             font-size: 14px;
-            font-family: 'Lora', serif;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            background-color: white;
         }
 
         .luxury-input:focus {
             outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+            border-color: var(--rl-gold);
+            box-shadow: 0 0 0 2px rgba(184, 154, 92, 0.1);
         }
 
+        /* Size Buttons */
         .size-btn {
-            padding: 10px 16px;
-            border: 2px solid #e5e7eb;
+            padding: 10px 20px;
+            border: 1px solid var(--rl-border);
             background: white;
             font-weight: 500;
             transition: all 0.2s;
-            border-radius: 4px;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
         }
 
         .size-btn:hover {
-            border-color: #4b5563;
+            border-color: var(--rl-gold);
+            color: var(--rl-gold);
         }
 
         .size-btn.selected {
-            background: #1a1a1a;
+            background: var(--rl-navy);
             color: white;
-            border-color: #1a1a1a;
+            border-color: var(--rl-navy);
         }
 
+        /* Color Buttons */
         .color-btn {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            border: 3px solid transparent;
+            border: 2px solid transparent;
             transition: all 0.2s;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .color-btn:hover {
             transform: scale(1.1);
+            border-color: var(--rl-gold);
         }
 
         .color-btn.selected {
-            border-color: #1a1a1a;
-            box-shadow: 0 0 0 2px white, 0 0 0 4px #1a1a1a;
+            border-color: var(--rl-navy);
+            box-shadow: 0 0 0 2px var(--rl-off-white), 0 0 0 4px var(--rl-navy);
+            transform: scale(1.05);
         }
 
+        /* Quantity Buttons */
         .qty-btn {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #e5e7eb;
+            border: 1px solid var(--rl-border);
             background: white;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .qty-btn:hover {
-            background: #f3f4f6;
+            background: var(--rl-off-white);
+            border-color: var(--rl-gold);
+            color: var(--rl-gold);
         }
 
+        /* Cart Icon */
         .cart-icon {
             position: relative;
             transition: all 0.3s ease;
@@ -120,10 +153,10 @@
         }
 
         .cart-icon:hover i {
-            color: #d4af37;
+            color: var(--rl-gold);
         }
 
-        /* Fixed sticky styles */
+        /* Sticky Image Container */
         .sticky-image-container {
             position: sticky !important;
             top: 120px !important;
@@ -132,7 +165,7 @@
             display: block !important;
         }
 
-        /* Ensure grid parent allows sticky */
+        /* Product Grid */
         .product-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -140,6 +173,73 @@
             align-items: start;
         }
 
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 12px;
+            letter-spacing: 0.05em;
+        }
+
+        .breadcrumb a {
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--rl-gold);
+        }
+
+        /* Add to Cart Button */
+        .add-to-cart-btn {
+            background-color: var(--rl-navy);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--rl-deep-navy);
+            transform: translateY(-2px);
+        }
+
+        /* Back Button */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--rl-charcoal);
+            transition: all 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--rl-gold);
+            gap: 12px;
+        }
+
+        /* Footer */
+        footer.nav-bg {
+            background: var(--rl-deep-navy);
+            border-top: 3px solid var(--rl-gold);
+        }
+
+        /* Modal */
+        #cartModal .bg-white {
+            border: 1px solid var(--rl-border);
+        }
+
+        #cartModal button {
+            transition: all 0.2s;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .product-grid {
                 grid-template-columns: 1fr;
@@ -149,16 +249,26 @@
                 position: relative !important;
                 top: 0 !important;
             }
+
+            .size-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            .color-btn {
+                width: 38px;
+                height: 38px;
+            }
         }
     </style>
 </head>
 
-<body class="bg-white text-gray-900">
+<body class="bg-[#faf7f2] text-[#2c2c2c]">
     <!-- RIX CLOTHES Navbar -->
     <nav class="nav-bg text-white sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <a href="index.html" class="text-3xl font-bold tracking-wider rix-gold"
-                style="font-family: 'Playfair Display', serif;">RIX CLOTHES</a>
+                style="font-family: 'Cormorant Garamond', serif; letter-spacing: 2px;">RIX CLOTHES</a>
 
             <div class="hidden md:flex items-center gap-4 text-sm tracking-widest uppercase text-gray-400">
                 <span>Classic</span>
@@ -171,8 +281,7 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <button id="cartBtn" class="cart-icon text-xl hover:rix-gold transition p-2 rounded-md"
-                    aria-label="Shopping Cart">
+                <button id="cartBtn" class="cart-icon text-xl transition p-2 rounded-md" aria-label="Shopping Cart">
                     <i class="fas fa-shopping-bag"></i>
                     <span id="cartCount"
                         class="absolute -top-2 -right-1 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
@@ -190,12 +299,12 @@
 
     <!-- Breadcrumb -->
     <div class="max-w-7xl mx-auto px-6 py-6">
-        <div class="flex items-center gap-2 text-sm text-gray-600">
-            <a href="index.html" class="hover:rix-gold transition">Home</a>
+        <div class="breadcrumb flex items-center gap-2 text-sm text-gray-500">
+            <a href="index.html" class="hover:rix-gold transition">HOME</a>
             <span>/</span>
-            <a href="index.html" class="hover:rix-gold transition">Shop</a>
+            <a href="index.html" class="hover:rix-gold transition">SHOP</a>
             <span>/</span>
-            <span id="breadcrumbCategory" class="text-gray-900">Product</span>
+            <span id="breadcrumbCategory" class="text-gray-700 font-medium">PRODUCT</span>
         </div>
     </div>
 
@@ -209,22 +318,34 @@
 
     <!-- RIX CLOTHES Footer -->
     <footer class="nav-bg text-white mt-32">
-        <div class="max-w-7xl mx-auto px-6 py-16">
-            <div class="grid grid-cols-3 gap-12 mb-12">
-                <div>
-                    <h3 class="text-sm tracking-widest font-semibold mb-4">SHOP</h3>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:rix-gold transition">New Arrivals</a></li>
-                        <li><a href="#" class="hover:rix-gold transition">Collections</a></li>
-                        <li><a href="#" class="hover:rix-gold transition">Best Sellers</a></li>
-                    </ul>
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12 mb-10">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-3"
+                        style="font-family: 'Cormorant Garamond', serif; color: var(--rl-gold);">
+                        RIX CLOTHES
+                    </h3>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        تابعنا هنا لمزيد من الملابس بتصويرنا الخاص
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/rix_clothess"
+                            class="text-gray-400 hover:text-[#b89a5c] transition">
+                            Instagram
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-[#b89a5c] transition">
+                            TikTok
+                        </a>
+                    </div>
                 </div>
 
-                <div>
-                    <h3 class="text-sm tracking-widest font-semibold mb-4">CONNECT</h3>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:rix-gold transition">Instagram</a></li>
-                        <li><a href="#" class="hover:rix-gold transition">Tiktok</a></li>
+                <div class="md:w-1/2">
+                    <h3 class="text-sm tracking-widest font-semibold mb-4 text-gray-200">متجرنا</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-[#b89a5c] transition text-sm">سياسة الخصوصية</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#b89a5c] transition text-sm">شروط الخدمة</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -236,10 +357,10 @@
 
     <!-- Cart Modal -->
     <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50">
-        <div class="bg-white w-full max-w-2xl max-h-96 overflow-y-auto rounded">
+        <div class="bg-white w-full max-w-2xl max-h-96 overflow-y-auto rounded shadow-2xl">
             <div class="sticky top-0 bg-white border-b px-8 py-6 flex justify-between items-center">
-                <h2 class="text-2xl font-bold" style="font-family: 'Playfair Display', serif;">Shopping Cart</h2>
-                <button id="closeCart" class="text-gray-600 text-2xl">&times;</button>
+                <h2 class="text-2xl font-bold" style="font-family: 'Cormorant Garamond', serif;">Shopping Cart</h2>
+                <button id="closeCart" class="text-gray-600 text-2xl hover:text-[#b89a5c] transition">&times;</button>
             </div>
             <div id="cartItems" class="px-8 py-6 space-y-6">
                 <!-- cart items rendered here -->
@@ -248,9 +369,9 @@
                 <div class="text-xl font-bold">Total: <span id="cartTotal">0.00</span> DZ</div>
                 <div class="flex gap-4">
                     <button id="clearCart"
-                        class="px-6 py-2 border border-gray-400 text-gray-900 hover:bg-gray-100 transition">CLEAR</button>
+                        class="px-6 py-2 border border-gray-400 text-gray-900 hover:bg-gray-100 transition text-sm uppercase tracking-wider">CLEAR</button>
                     <button id="checkoutBtn"
-                        class="px-6 py-2 bg-gray-900 text-white hover:bg-black transition">CHECKOUT</button>
+                        class="px-6 py-2 bg-[#1a2c3e] text-white hover:bg-[#0f1e2c] transition text-sm uppercase tracking-wider">CHECKOUT</button>
                 </div>
             </div>
         </div>
@@ -273,7 +394,7 @@
             'Pink': '#db2777',
             'Brown': '#92400e',
             'Gray': '#6b7280',
-            'Navy': '#1e3a8a',
+            'Navy': '#1a2c3e',
             'Beige': '#d6d3d1',
             'Orange': '#ea580c',
             'Burgundy': '#831843',
@@ -324,7 +445,7 @@
                     `;
                 });
             } else {
-                sizesHTML = '<p class="text-gray-500 text-sm">No sizes available</p>';
+                sizesHTML = '<p class="text-gray-500 text-sm italic">No sizes available</p>';
             }
 
             // Generate colors HTML
@@ -333,67 +454,70 @@
                 availableColors.forEach((color, index) => {
                     const selected = index === 0 ? 'selected' : '';
                     const colorHex = colorMap[color] || '#cccccc';
+                    const borderColor = color === 'White' ? '#e5e7eb' : 'transparent';
                     colorsHTML += `
                         <button type="button" class="color-btn ${selected}" 
                                 data-color="${color}" 
-                                style="background-color: ${colorHex}"
+                                style="background-color: ${colorHex}; border-color: ${borderColor}"
                                 title="${color}">
                         </button>
                     `;
                 });
             } else {
-                colorsHTML = '<p class="text-gray-500 text-sm">No colors available</p>';
+                colorsHTML = '<p class="text-gray-500 text-sm italic">No colors available</p>';
             }
 
-            // Display product details with sticky image - using product-grid class
+            // Display product details
             document.getElementById('productDetail').innerHTML = `
                 <div class="product-grid">
                     <!-- Left column with sticky image -->
                     <div class="sticky-image-container">
-                        <img src="${product.image_url || 'https://via.placeholder.com/600x800'}" 
-                             alt="${product.name}" 
-                             class="w-full rounded-2xl shadow-2xl object-cover">
+                        <div class="bg-white p-4 shadow-lg border border-[#e5d9cc]">
+                            <img src="${product.image_url || 'https://via.placeholder.com/600x800?text=No+Image'}" 
+                                 alt="${product.name}" 
+                                 class="w-full object-cover">
+                        </div>
                     </div>
                     
                     <!-- Right column with scrollable content -->
-                    <div class="space-y-8">
+                    <div class="space-y-6">
                         <div>
-                            <p id="productCategory" class="text-xs tracking-widest text-gray-500 mb-2 uppercase">
+                            <p id="productCategory" class="text-xs tracking-[3px] text-gray-500 mb-3 uppercase">
                                 ${product.category || 'UNCATEGORIZED'}
                             </p>
-                            <h1 id="productName" class="text-4xl md:text-5xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">
+                            <h1 id="productName" class="text-4xl md:text-5xl font-bold mb-3" style="font-family: 'Cormorant Garamond', serif;">
                                 ${product.name}
                             </h1>
-                            <p id="productPrice" class="text-4xl md:text-5xl font-bold rix-gold mb-8">${formatPrice(product.price)} DZ</p>
+                            <p id="productPrice" class="text-3xl md:text-4xl font-bold rix-gold mb-6">${formatPrice(product.price)} DZ</p>
                         </div>
                         
                         <!-- Description -->
-                        <div class="mb-8">
-                            <h3 class="text-sm tracking-widest font-semibold mb-3">DESCRIPTION</h3>
-                            <p id="productDescription" class="text-gray-600 leading-relaxed text-lg">
+                        <div class="border-t border-[#e5d9cc] pt-6">
+                            <h3 class="text-xs tracking-[3px] font-semibold mb-3 uppercase text-gray-500">DESCRIPTION</h3>
+                            <p id="productDescription" class="text-gray-600 leading-relaxed text-base">
                                 ${product.description || 'No description available.'}
                             </p>
                         </div>
                         
                         <!-- Size Selection -->
-                        <div class="mb-8">
-                            <h3 class="text-sm tracking-widest font-semibold mb-3">SELECT SIZE</h3>
+                        <div class="border-t border-[#e5d9cc] pt-6">
+                            <h3 class="text-xs tracking-[3px] font-semibold mb-3 uppercase text-gray-500">SELECT SIZE</h3>
                             <div id="productSizes" class="flex flex-wrap gap-3">
                                 ${sizesHTML}
                             </div>
                         </div>
                         
                         <!-- Color Selection -->
-                        <div class="mb-8">
-                            <h3 class="text-sm tracking-widest font-semibold mb-3">SELECT COLOR</h3>
+                        <div class="border-t border-[#e5d9cc] pt-6">
+                            <h3 class="text-xs tracking-[3px] font-semibold mb-3 uppercase text-gray-500">SELECT COLOR</h3>
                             <div id="productColors" class="flex flex-wrap gap-3">
                                 ${colorsHTML}
                             </div>
                         </div>
                         
                         <!-- Quantity -->
-                        <div class="mb-10">
-                            <h3 class="text-sm tracking-widest font-semibold mb-3">QUANTITY</h3>
+                        <div class="border-t border-[#e5d9cc] pt-6">
+                            <h3 class="text-xs tracking-[3px] font-semibold mb-3 uppercase text-gray-500">QUANTITY</h3>
                             <div class="flex items-center gap-4">
                                 <button id="decreaseQty" class="qty-btn">−</button>
                                 <span id="productQuantity" class="text-2xl font-semibold w-16 text-center">1</span>
@@ -403,15 +527,15 @@
                         
                         <!-- Add to Cart Button -->
                         <button id="addToCartBtn"
-                            class="w-full py-5 bg-gray-900 text-white text-base tracking-widest hover:bg-black transition mb-8 rounded-lg text-lg font-semibold">
+                            class="add-to-cart-btn">
                             ADD TO CART
                         </button>
                         
                         <!-- Back to Shop -->
-                        <div class="mt-8">
-                            <a href="index.html"
-                                class="inline-block text-sm tracking-widest text-gray-600 hover:rix-gold transition">
-                                ← BACK TO SHOP
+                        <div class="pt-4">
+                            <a href="index.html" class="back-link">
+                                <i class="fas fa-arrow-left text-xs"></i>
+                                BACK TO SHOP
                             </a>
                         </div>
                     </div>
